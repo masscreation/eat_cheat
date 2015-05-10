@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nutritionix_id: MyString
+  string,: MyString
+  calories: 
+  fat: 
+  protein: 
+  carbs: 
+  serving_weight_grams: 1
+
+two:
+  nutritionix_id: MyString
+  string,: MyString
+  calories: 
+  fat: 
+  protein: 
+  carbs: 
+  serving_weight_grams: 1
