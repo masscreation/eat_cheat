@@ -5,23 +5,25 @@
 
 <hr/>
 
-<% @items.each do |item| %>
+
   <div style="margin:20px;">
-    <%= item.name %>
     <%= form_for [@user, @recipe] do |f| %>
+      
+      <%= f.fields_for @ingredient do |b| %> 
+        <%= b.label :item %> 
+        <%= b.select(:item_id, @item_options) %>
+        <%= b.label "Amount in recipe" %> 
+        <%= b.number_field :quant_of_item_eaten %>
+        <%= b.label :time_eaten %> 
+      <% end %>
+
       <%= f.submit "Add item to recipe" %>
-      <% f.fields_for @ingredient do |b| %> 
-        <%= render 'ingredient_form' %> 
-      <% end %>
-      <% end %>
+    <% end %>
     <div>
-    <%= item.calories %>
-    <%= item.fat %>
-    <%= item.protein %>
-    <%= item.carbs %>user_recipe_ingredients(@user, @recipe.id)
+ 
     </div>
   </div>
 
 
-<% end %>
+
 

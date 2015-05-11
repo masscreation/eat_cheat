@@ -27,12 +27,14 @@ class RecipesController < ApplicationController
     @user = current_user
     @recipe = Recipe.find(params[:id])
     @items = Item.all
+    @item_options = Item.all.map { |item| [item.name, item.id] }
+    @ingredient = Ingredient.new
   end
 
   def update
-    if @recipe.update?
-      redirect_to @recipe
-    end
+    
+      redirect_to :root
+    
   end
 
   def destroy
