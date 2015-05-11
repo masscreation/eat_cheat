@@ -1,2 +1,11 @@
 <h1>Items#new</h1>
-<p>Find me in app/views/items/new.html.erb</p>
+<%= form_tag("/items/new", method: "get") do %>
+ <%= label_tag(:q, "Search for:") %>
+ <%= text_field_tag(:q) %>
+ <%= submit_tag("Search") %>
+<% end %>
+
+<% @items.each do |item| %>
+    <div><%= item["fields"]["item_name"] %></div>
+<% end %>
+
