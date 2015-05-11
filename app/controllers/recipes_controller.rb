@@ -1,5 +1,12 @@
 class RecipesController < ApplicationController
   def show
+    @user = current_user
+    @recipes = current_user.recipes
+  end
+
+  def index
+    @user = current_user
+    @recipes = current_user.recipes
   end
 
   def new
