@@ -8,7 +8,12 @@
 <% @items.each do |item| %>
   <div style="margin:20px;">
     <%= item.name %>
-    <%= button_to "Add item to recipe", user_recipe_ingredients_path(@user, @recipe.id) %>
+    <%= form_for [@user, @recipe] do |f| %>
+      <%= f.submit "Add item to recipe" %>
+      <% f.fields_for @ingredient do |b| %> 
+        <%= render 'ingredient_form' %> 
+      <% end %>
+      <% end %>
     <div>
     <%= item.calories %>
     <%= item.fat %>

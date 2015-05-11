@@ -29,11 +29,18 @@ class RecipesController < ApplicationController
     @items = Item.all
   end
 
+  def update
+    if @recipe.update?
+      redirect_to @recipe
+    end
+  end
+
   def destroy
   end
 
   private
   def recipe_params
-    params.require(:recipe).permit(:name, :user_id)
+    params.require(:recipe).permit(:name, :user_id, :ingredient_attributes=>[:quant_of_item_eaten])
   end
+    
 end
