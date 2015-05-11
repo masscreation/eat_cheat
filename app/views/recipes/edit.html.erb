@@ -1,2 +1,22 @@
 <h1>Recipes#edit</h1>
 <p>Find me in app/views/recipes/edit.html.erb</p>
+
+<%= @recipe.name  %>
+
+<hr/>
+
+<% @items.each do |item| %>
+  <div style="margin:20px;">
+    <%= item.name %>
+    <%= button_to "Add item to recipe", user_recipe_ingredients_path(@user, @recipe.id) %>
+    <div>
+    <%= item.calories %>
+    <%= item.fat %>
+    <%= item.protein %>
+    <%= item.carbs %>user_recipe_ingredients(@user, @recipe.id)
+    </div>
+  </div>
+
+
+<% end %>
+

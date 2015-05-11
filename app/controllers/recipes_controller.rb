@@ -24,7 +24,9 @@ class RecipesController < ApplicationController
   end
 
   def edit
-
+    @user = current_user
+    @recipe = Recipe.find(params[:id])
+    @items = Item.all
   end
 
   def destroy
