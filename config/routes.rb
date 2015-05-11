@@ -1,5 +1,35 @@
 Rails.application.routes.draw do
+  get 'items/show'
+
+  get 'items/new'
+
+  get 'items/create'
+
+  get 'items/index'
+
+  get 'items/destroy'
+
+  get 'recipes/show'
+
+  get 'recipes/new'
+
+  get 'recipes/create'
+
+  get 'recipes/edit'
+
+  get 'recipes/destroy'
+
   devise_for :users
+
+  resources :items
+  
+  resources :users do 
+    resources :profiles
+    resources :recipes do 
+      resources :ingredients
+    end
+  end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
