@@ -16,7 +16,9 @@ class ProfilesController < ApplicationController
 			recipe.meals.each do |meal|
 				if (meal.time_eaten.day == @today.day) && 
                   (meal.time_eaten.month == @today.month)
-                  @food_for_today << meal
+                 
+
+                  @food_for_today << {'time_eaten': meal.time_eaten, 'name': meal.recipe.name} 
               end
 			end
 		end
@@ -25,11 +27,12 @@ class ProfilesController < ApplicationController
 			item.meals.each do |meal|
 				if (meal.time_eaten.day == @today.day) && 
                   (meal.time_eaten.month == @today.month)
-                  @food_for_today << meal
+                  @food_for_today << {'time_eaten': meal.time_eaten, 'name': meal.item.name} 
               end
 			end
 		end
 
+		puts "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n #{@food_for_today}"
 
 
 

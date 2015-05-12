@@ -146,10 +146,11 @@
     <tbody>
       <% @food_for_today.each do |food| %>
       <tr>
-        <td><%= food.time_eaten.hour %>: <%= food.time_eaten.min %></td>
+        <td><%= food[:time_eaten].hour %>: <%= food[:time_eaten].min %></td>
+      
+        <td><%= food[:name] %></td>
         
-        <td><%= food.recipe. %> <%= food.item %></td>
-        <% puts food.recipe %>
+        
       </tr>
       <% end %>
     </tbody>
