@@ -107,13 +107,55 @@
 
           <h2 class="sub-header">Daily Food Diary</h2>
          
-              	
-              	<% @user.recipes.each do |recipe| %>
+          this is form:
+
+         <%= form_for [@meal] do |f| %>
+           <% if @meal.errors.any? %>
+            <div id="error_explanation">
+             <h2><%= pluralize(@meal.errors.count, "error") %> prohibited this meal from being saved:</h2>
+
+              <ul>
+              <% @meal.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+              </ul>
+            </div>
+              <% end %>
+              <% end %>
+
+              <%= f.label "Select a recipe" %>
+              <%= f.select(:recipe_id, @recipe_options,{ include_blank: true }) %>
              
-                  <div><%= recipe.name %> </div>
-             
-               
-                <% end %> 
+              <%= f.label "Select an item" %>
+              <%= f.select(:item_id, @item_options,{ include_blank: true }) %>
+              
+              <%= f.label "Select a time" %>
+              <%= f.datetime_local_field :time_eaten  %>
+              <%= f.submit "Save meal" %>
+              <% end %>
+              	 
+            <div class="container">
+  <h2>Food</h2>
+  <p>The .table-striped class adds zebra-stripes to a table:</p>            
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Time of Day</th>
+        <th>Meal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @food_for_today.each do |food| %>
+      <tr>
+        <td><%= food[:time_eaten].hour %>: <%= food[:time_eaten].min %></td>
+      
+        <td><%= food[:name] %></td>
+        
+        
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
     
               
         </div>
