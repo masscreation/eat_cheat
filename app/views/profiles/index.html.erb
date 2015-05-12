@@ -133,14 +133,28 @@
               <%= f.submit "Save meal" %>
               <% end %>
               	 
-              	<% @user.recipes.each do |recipe| %>
-             
-                  <div><%= recipe.name %> </div>
-             <% recipe.meals.each do |meal| %>
-             <%= meal %>
-             <% end %>   
-                <% end %> 
-
+            <div class="container">
+  <h2>Food</h2>
+  <p>The .table-striped class adds zebra-stripes to a table:</p>            
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Time of Day</th>
+        <th>Meal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @food_for_today.each do |food| %>
+      <tr>
+        <td><%= food.time_eaten.hour %>: <%= food.time_eaten.min %></td>
+        
+        <td><%= food.recipe. %> <%= food.item %></td>
+        <% puts food.recipe %>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
     
               
         </div>
