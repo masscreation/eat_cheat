@@ -107,13 +107,39 @@
 
           <h2 class="sub-header">Daily Food Diary</h2>
          
-              	
+          this is form:
+
+         <%= form_for [@meal] do |f| %>
+           <% if @meal.errors.any? %>
+            <div id="error_explanation">
+             <h2><%= pluralize(@meal.errors.count, "error") %> prohibited this meal from being saved:</h2>
+
+              <ul>
+              <% @meal.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+              </ul>
+            </div>
+              <% end %>
+              <% end %>
+
+              <%= f.label "Select a recipe" %>
+              <%= f.select(:recipe_id, @recipe_options,{ include_blank: true }) %>
+             
+              <%= f.label "Select an item" %>
+              <%= f.select(:item_id, @item_options,{ include_blank: true }) %>
+              
+              <%= f.label "Select a time" %>
+              <%= f.datetime_local_field :time_eaten  %>
+              <%= f.submit "Save meal" %>
+              <% end %>
+              	 
               	<% @user.recipes.each do |recipe| %>
              
                   <div><%= recipe.name %> </div>
              
                
                 <% end %> 
+
     
               
         </div>
