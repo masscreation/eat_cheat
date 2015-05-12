@@ -32,7 +32,19 @@ class RecipesController < ApplicationController
   end
 
   def update
-    
+      @user = current_user
+      @recipe = Recipe.find(params[:id])
+      puts "\n\n\n\n\n\n\n\n\n\n\n\n\n  #{@recipe.name}"
+
+      #need to update ingredients to set quantity used
+      @ingredient = params["recipe"]["ingredient"]
+      puts "#{@ingredient["item_id"]}"
+
+
+      @recipe.ingredients << @ingredient
+      #need to associate item with recipe
+
+
       redirect_to :root
     
   end
