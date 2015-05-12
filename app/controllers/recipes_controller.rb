@@ -32,16 +32,23 @@ class RecipesController < ApplicationController
   end
 
   def update
-      @user = current_user
       @recipe = Recipe.find(params[:id])
       puts "\n\n\n\n\n\n\n\n\n\n\n\n\n  #{@recipe.name}"
+     
 
-      #need to update ingredients to set quantity used
-      @ingredient = params["recipe"]["ingredient"]
-      puts "#{@ingredient["item_id"]}"
+      @item = Item.find(params["recipe"]["ingredient"]["item_id"])
+      puts "#{@item}"
 
+      #associates the found item with the recipe
+      @recipe.items <<  @item
 
-      @recipe.ingredients << @ingredient
+      @quant = params["recipe"]["ingredient"]["quant_of_item_eaten"]
+      @ingredients = Ingredient.where(recipe_id: @recipe.id)
+
+      @ingredients.each do |x|
+        x.update_attribute('quant_of_item_eaten', @quant)
+      end
+
       #need to associate item with recipe
 
 
