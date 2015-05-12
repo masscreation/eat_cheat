@@ -136,8 +136,9 @@
               	<% @user.recipes.each do |recipe| %>
              
                   <div><%= recipe.name %> </div>
-             
-               
+             <% recipe.meals.each do |meal| %>
+             <%= meal %>
+             <% end %>   
                 <% end %> 
 
     

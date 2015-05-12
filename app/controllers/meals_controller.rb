@@ -3,7 +3,9 @@ class MealsController < ApplicationController
 	def create
 		@meal = Meal.new(meal_params)
 		puts "\n\n\n\n\n\n\n\n\n\n #{@meal}"
+		if @meal.save
 		redirect_to :root
+		end
 	end
 
 
