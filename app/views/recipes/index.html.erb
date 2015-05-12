@@ -1,0 +1,6 @@
+<% @recipes.each do |recipe|  %>
+  <div>
+    <%= recipe.name %>
+    <%=  button_to "Edit Recipe", edit_user_recipe_path(@user, recipe.id), method: 'get' %></li>
+  </div>
+<% end  %>
