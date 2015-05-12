@@ -1,0 +1,10 @@
+ 
+      <%= b.label :item %> 
+      <%= b.select (:item_id) %>
+      <%= b.label "Amount in recipe" %> 
+      <%= b.number_field :quant_of_item_eaten %>
+      <%= b.label :time_eaten %> 
+      <%= b.datetime :time_eaten %>  
+  
+
+ 
