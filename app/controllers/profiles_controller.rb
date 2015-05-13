@@ -3,7 +3,7 @@ class ProfilesController < ApplicationController
 	def index
 		@user = current_user
 		@meal = Meal.new
-		@recipe_options = Recipe.all.map { |recipe| [recipe.name, recipe.id] }
+		@recipe_options = current_user.recipes.map { |recipe| [recipe.name, recipe.id] }
 		@item_options = Item.all.map { |item| [item.name, item.id] }
 		@items = Item.all
 

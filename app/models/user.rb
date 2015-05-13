@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
 
   has_many :profiles
   has_many :recipes
+  has_many :items
 end
