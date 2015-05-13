@@ -142,7 +142,13 @@
     <tbody>
       <% @food_for_today.each do |food| %>
       <tr>
-        <td><%= food[:time_eaten].hour %>: <%= food[:time_eaten].min %></td>
+        <td>
+          <% if food[:time_eaten].min.between?(0,9) %>
+            <%= food[:time_eaten].hour %>:0<%= food[:time_eaten].min %>
+          <% else %>
+            <%= food[:time_eaten].hour %>:<%= food[:time_eaten].min %>
+          <% end  %>
+        </td>
       
         <td><%= food[:name] %></td>
         
