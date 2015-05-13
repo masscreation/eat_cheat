@@ -22,6 +22,17 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
+
+    puts "\n\n\n\n\n\n\n\n\n\n\n BEFORE CHANGE: #{@item.fat}"
+
+    @item.fat *= 9
+    @item.protein *= 4
+    @item.carbs *= 4
+
+
+    puts "\n\n\n AFTER CHANGE: #{@item.fat}"
+
+
     if @item.save 
       current_user.items << @item
       redirect_to items_path

@@ -26,15 +26,15 @@
         </td>
         <td>
           <%= f.label :fat_calories %><br>
-          <%= f.number_field :fat, :value => item["fields"]["nf_total_fat"] * 9 %>
+          <%= f.number_field :fat, :value => item["fields"]["nf_total_fat"] %>
         </td>
         <td>
           <%= f.label :protein_calories %> <br>
-          <%= f.number_field :protein, :value => item["fields"]["nf_protein"] * 4 %>
+          <%= f.number_field :protein, :value => item["fields"]["nf_protein"]  %>
         </td>
         <td>
           <%= f.label :carb_calories %> <br>
-          <%= f.text_field :carbs, :value => item["fields"]["nf_total_carbohydrate"] * 4 %>
+          <%= f.text_field :carbs, :value => item["fields"]["nf_total_carbohydrate"] %>
         </td>
         <td>
           <%= f.label :serving_weight_grams %><br> 
