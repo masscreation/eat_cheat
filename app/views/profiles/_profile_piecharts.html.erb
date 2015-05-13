@@ -1,6 +1,6 @@
 <script>
-          $(document).ready(function(){
-          pieChart = function (place, protein, carbs, fat) {
+$(document).ready(function(){
+    pieChart = function (place, protein, carbs, fat) {
     var w = 300,                        //width
     h = 300,                            //height
     r = 100,                            //radius
@@ -44,18 +44,18 @@
             .attr("text-anchor", "middle")                          //center the text on it's origin
             .text(function(d, i) { return data[i].label; });        //get the label from our original data array
             
-}
+    }
 
-// display ideal pie chart
-pieChart('#chart', 60, 20, 20);
+    // display ideal pie chart
+    pieChart('#chart', 20, 60, 20);
 
-// only display actual intake pie chart if theres content. 
-// otherwise make it a perfectly equal amount
-<%  unless (@protein == 0 && @carbs == 0 && @fat == 0) %>
-    pieChart('#actual', <%= @protein %>,<%= @carbs %>, <%= @fat %>);
-<% else %>
-    pieChart('#actual', 3, 3, 3);
-<% end %>
+    // only display actual intake pie chart if theres content. 
+    // otherwise make it a perfectly equal amount
+    <%  unless (@protein == 0 && @carbs == 0 && @fat == 0) %>
+        pieChart('#actual', <%= @protein %>,<%= @carbs %>, <%= @fat %>);
+    <% else %>
+        pieChart('#actual', 3, 3, 3);
+    <% end %>
 
 });
 </script>
