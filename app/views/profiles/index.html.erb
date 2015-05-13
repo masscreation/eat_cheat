@@ -36,7 +36,7 @@
 
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
-<<<<<<< HEAD
+
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
           <span class="sr-only">Toggle navigation</span>
@@ -95,7 +95,7 @@
 
       
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-=======
+
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
@@ -121,7 +121,7 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">      
 
->>>>>>> upstream/master
+
           <h1 class="page-header">Your Dashboard</h1>
 
           <div class="row placeholders">
@@ -142,8 +142,7 @@
             </div>
           </div>
 
-<<<<<<< HEAD
-=======
+
           <h2 class="sub-header">Daily Food Diary</h2>
          
 
@@ -155,7 +154,7 @@
             <% end %> 
 
           this is form:
->>>>>>> upstream/master
+
 
 <!-- Daily Food Diary - selects MEAL by TIME and will be moved to the search page later -->
 
@@ -183,7 +182,7 @@
               <%= f.datetime_local_field :time_eaten  %>
               <%= f.submit "Save meal" %>
               <% end %>
-<<<<<<< HEAD
+
 
 
 <!-- Datatable for ALL meal display -->
@@ -293,43 +292,9 @@
                       </tr>
                   </tbody>
                 </table>
-=======
+
               	 
-            <div class="container">
-  <h2>Food</h2>
-  <p>The .table-striped class adds zebra-stripes to a table:</p>            
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Time of Day</th>
-        <th>Meal</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @food_for_today.each do |food| %>
-      <tr>
-        <td>
-          <% if food[:time_eaten].min.between?(0,9) %>
-            <%= food[:time_eaten].hour %>:0<%= food[:time_eaten].min %>
-          <% else %>
-            <%= food[:time_eaten].hour %>:<%= food[:time_eaten].min %>
-          <% end  %>
-        </td>
-      
-        <td><%= food[:name] %></td>
-        
-        
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-
-
-    
-              
->>>>>>> upstream/master
-        </div>
+          
 
 
 
