@@ -17,6 +17,15 @@
 //= require_tree .
 
 
+$(document).ready(function(){
+  var search = $('.searchName');
+
+  search.click(function(){
+    $(this).next().slideToggle('show');
+  }); //end click
+}); //end ready
+
+
 
 
          
