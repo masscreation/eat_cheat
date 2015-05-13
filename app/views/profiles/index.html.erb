@@ -28,57 +28,71 @@
     <![endif]-->
   </head>
 
-  <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
-        </div>
-      </div>
-    </nav>
+<body>
 
+
+<!-- NAVBAR -->
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">Export</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><%= link_to "Create a New Recipe", new_user_recipe_path(@user) %></li>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Project name</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Dashboard</a></li>
+          <li><a href="#">Settings</a></li>
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Help</a></li>
+          <li><%= link_to "Create a New Recipe", new_user_recipe_path(@user) %></li>
+          <li><%= link_to "Create a New Item", new_item_path %> </li>
+          <li><%= link_to "Show all recipies", user_recipes_path(@user) %></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+                      <!-- second Navbar commented out because Navigation is sufficuient on top -->
 
-            <li><%= link_to "Create a New Item", new_item_path %> </li>
-            <li><%= link_to "Show all recipies", user_recipes_path(@user) %></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-            <li><a href="">More navigation</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-          </ul>
-        </div>
+                      <!--           <form class="navbar-form navbar-right">
+                                  <input type="text" class="form-control" placeholder="Search...">
+                                </form> -->
+
+
+                          <!-- <div class="container-fluid">
+                            <div class="row">
+                              <div class="col-sm-3 col-md-2 sidebar">
+                                <ul class="nav nav-sidebar">
+                                  <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+                                  <li><a href="#">Reports</a></li>
+                                  <li><a href="#">Analytics</a></li>
+                                  <li><a href="#">Export</a></li>
+                                </ul>
+                                <ul class="nav nav-sidebar">
+                                  <li><%= link_to "Create a New Recipe", new_user_recipe_path(@user) %></li>
+                                  <li><%= link_to "Create a New Item", new_item_path %> </li>
+                                  <li><%= link_to "Show all recipies", user_recipes_path(@user) %></li>
+                                  <li><a href="">One more nav</a></li>
+                                  <li><a href="">Another nav item</a></li>
+                                  <li><a href="">More navigation</a></li>
+                                </ul>
+                                <ul class="nav nav-sidebar">
+                                  <li><a href="">Nav item again</a></li>
+                                  <li><a href="">One more nav</a></li>
+                                  <li><a href="">Another nav item</a></li>
+                                </ul>
+                              </div> -->
+
+
+<!-- Placeholder for where partial with data analysis will go -->
+
+      
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Your Dashboard</h1>
 
@@ -105,10 +119,10 @@
             </div>
           </div>
 
-          <h2 class="sub-header">Daily Food Diary</h2>
-         
-          this is form:
 
+<!-- Daily Food Diary - selects MEAL by TIME and will be moved to the search page later -->
+
+          <h2 class="sub-header">Daily Food Diary</h2>
          <%= form_for [@meal] do |f| %>
            <% if @meal.errors.any? %>
             <div id="error_explanation">
@@ -132,35 +146,119 @@
               <%= f.datetime_local_field :time_eaten  %>
               <%= f.submit "Save meal" %>
               <% end %>
-              	 
-            <div class="container">
-  <h2>Food</h2>
-  <p>The .table-striped class adds zebra-stripes to a table:</p>            
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Time of Day</th>
-        <th>Meal</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @food_for_today.each do |food| %>
-      <tr>
-        <td><%= food[:time_eaten].hour %>: <%= food[:time_eaten].min %></td>
-      
-        <td><%= food[:name] %></td>
-        
-        
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-    
-              
+
+
+<!-- Datatable for ALL meal display -->
+        <div class="container">
+
+          <h2><%= link_to "<", root_path(:@date_from => Time.new.beginning_of_day.to_i-1.day, :@date_til => Time.new.end_of_day.to_i-1.day), :class => "ui-button" %></h2>
+
+          <h2><%= link_to "TODAY", root_path(:@date_from => Time.new.beginning_of_day.to_i, :@date_til => Time.new.end_of_day.to_i), :class => "ui-button" %></h2>
+
+          <h2><%= link_to ">", root_path(:@date_from => Time.new.beginning_of_day.to_i+1.day, :@date_til => Time.new.end_of_day.to_i+1.day), :class => "ui-button" %></h2>
+
+
+          <h2>Nutrition Log</h2>
+
+            <p>Your logged food will display below.</p> 
+ 
+          <!-- Display morning data  -->          
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th class="persist essential" id="co-0">Morning</th>
+                      <th class="optonal" id="co-1">cal</th>
+                      <th class="optonal" id="co-2">carb</th>
+                      <th  class="optonal" id="co-3">prot</th>
+                      <th  class="optonal" id="co-4">fat</th>
+                    </tr>
+                  </thead>
+                <tbody>
+                    <% @food_for_today.each do |food| %>
+                    
+                      <tr>
+                        <td class="persist essential" id="co-0"><%= food[:name] %></td>
+                        <td class="optonal" id="co-1"><%= food[:calories] %></td>
+                        <td class="optonal" id="co-2"><%= food[:carbs] %></td>
+                        <td class="optonal" id="co-3"><%= food[:protein] %></td>
+                        <td class="optonal" id="co-4"><%= food[:fat] %></td>
+                      </tr>
+                    <% end %>
+                      <tr>              
+                        <td class="persist essential" id="co-0"></td>
+                        <td class="optonal" id="co-1">sum of calories</td>
+                        <td class="optonal" id="co-2">sum of carbs</td>
+                        <td class="optonal" id="co-3">sum of protein</td>
+                        <td class="optonal" id="co-4">sum of fat</td>
+                      </tr>
+                  </tbody>
+                </table>
+
+          <!-- Display Midday data -->
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th class="persist essential" id="co-0">Midday</th>
+                      <th class="optonal" id="co-1"></th>
+                      <th class="optonal" id="co-2"></th>
+                      <th class="optonal" id="co-3"></th>
+                      <th class="optonal" id="co-4"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @food_for_today.each do |food| %>
+                      <tr>
+                        <td class="persist essential" id="co-0"><%= food[:name] %></td>
+                        <td class="optonal" id="co-1"><%= food[:calories] %></td>
+                        <td class="optonal" id="co-2"><%= food[:carbs] %></td>
+                        <td class="optonal" id="co-3"><%= food[:protein] %></td>
+                        <td class="optonal" id="co-4"><%=  food[:fat] %></td>
+                    <% end %>
+                      </tr>
+                      <tr>              
+                        <td class="persist essential" id="co-0"></td>
+                        <td class="optonal" id="co-1">sum of calories</td>
+                        <td class="optonal" id="co-2">sum of carbs</td>
+                        <td class="optonal" id="co-3">sum of protein</td>
+                        <td class="optonal" id="co-4">sum of fat</td>
+                      </tr>
+                  </tbody>
+                </table>
+
+          <!-- Display Evening data -->
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th class="persist essential" id="co-0">Evening</th>
+                      <th class="optonal" id="co-1"></th>
+                      <th class="optonal" id="co-2"></th>
+                      <th class="optonal" id="co-3"></th>
+                      <th class="optonal" id="co-4"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @food_for_today.each do |food| %>
+                      <tr>
+                        <td class="persist essential" id="co-0"><%= food[:name] %></td>
+                        <td class="optonal" id="co-1"><%= food[:calories] %></td>
+                        <td class="optonal" id="co-2"><%= food[:carbs] %></td>
+                        <td class="optonal" id="co-3"><%= food[:protein] %></td>
+                        <td class="optonal" id="co-4"><%= food[:fat] %></td>
+                    <% end %>
+                      </tr>
+                      <tr>              
+                        <td class="persist essential" id="co-0"></td>
+                        <td class="optonal" id="co-1">sum of calories</td>
+                        <td class="optonal" id="co-2">sum of carbs</td>
+                        <td class="optonal" id="co-3">sum of protein</td>
+                        <td class="optonal" id="co-4">sum of fat</td>
+                      </tr>
+                  </tbody>
+                </table>
         </div>
-      </div>
-    </div>
+
+
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
