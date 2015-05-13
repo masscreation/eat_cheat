@@ -2,6 +2,7 @@ class RecipesController < ApplicationController
   def show
     @user = current_user
     @recipes = current_user.recipes
+    @recipe = Recipe.find(params[:id])
   end
 
   def index

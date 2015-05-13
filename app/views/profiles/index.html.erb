@@ -108,12 +108,11 @@
           <h2 class="sub-header">Daily Food Diary</h2>
          
               	
-              	<% @user.recipes.each do |recipe| %>
-             
-                  <div><%= recipe.name %> </div>
-             
-               
-                <% end %> 
+          	<% @user.recipes.each do |recipe| %>
+         
+              <div><%= link_to "#{recipe.name}", user_recipe_path(@user, recipe) %> </div>
+      
+            <% end %> 
     
               
         </div>

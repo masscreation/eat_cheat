@@ -1,6 +1,28 @@
-<% @recipes.each do |recipe|  %>
-  <div>
-    <%= recipe.name %>
-    <%=  button_to "Edit Recipe", edit_user_recipe_path(@user, recipe.id), method: 'get' %></li>
-  </div>
-<% end  %>
+<div class="container">
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			
+			<table>
+				<thead>
+					<tr>
+						<th><h1>Your Recipes</h1></th>
+					</tr>
+				</thead>
+				<% @recipes.each do |recipe|  %>
+					<tr>
+						<td><h2><%= link_to "#{recipe.name}", user_recipe_path(@user, recipe) %></h2></td>
+						<td><%= button_to "Edit", edit_user_recipe_path(@user, recipe.id), method: 'get' %></td>
+						<td><%= button_to "Destroy", user_recipe_path(@user, recipe.id), method: 'delete', data: { confirm: 'Are you sure?' } %></td>
+					</tr>
+				<% end  %>
+			</table>
+			    
+			<br><br>
+			
+			<%= link_to "Back to Dashboard", '/' %> 
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+</div>
+
