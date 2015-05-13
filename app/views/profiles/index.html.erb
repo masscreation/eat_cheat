@@ -79,29 +79,25 @@
             <li><a href="">Another nav item</a></li>
           </ul>
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">      
+
           <h1 class="page-header">Your Dashboard</h1>
 
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
+              <h4>Ideal</h4>
+              <span id = "chart">
+              </span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
+              <h4>Actual</h4>
+              <span id = "actual">
+              </span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
+              
             </div>
           </div>
 
@@ -146,7 +142,13 @@
     <tbody>
       <% @food_for_today.each do |food| %>
       <tr>
-        <td><%= food[:time_eaten].hour %>: <%= food[:time_eaten].min %></td>
+        <td>
+          <% if food[:time_eaten].min.between?(0,9) %>
+            <%= food[:time_eaten].hour %>:0<%= food[:time_eaten].min %>
+          <% else %>
+            <%= food[:time_eaten].hour %>:<%= food[:time_eaten].min %>
+          <% end  %>
+        </td>
       
         <td><%= food[:name] %></td>
         
@@ -156,11 +158,16 @@
     </tbody>
   </table>
 </div>
+
     
               
         </div>
       </div>
     </div>
+
+
+
+    <%= render "profile_piecharts" %>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
