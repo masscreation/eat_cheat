@@ -11,24 +11,29 @@ class ProfilesController < ApplicationController
 
 		@food_for_today = []
 
+            @fat = 0
+            @protein = 0
+            @carbs = 0
+
 		#run through recipe.meals
 		current_user.recipes.each do |recipe|
-			recipe.meals.each do |meal|
-				if (meal.time_eaten.day == @today.day) && 
-                  (meal.time_eaten.month == @today.month)
-                 
-
-                  @food_for_today << {'time_eaten': meal.time_eaten, 'name': meal.recipe.name} 
-              end
-			end
+		    recipe.meals.each do |meal|
+			if (meal.time_eaten.day == @today.day) && (meal.time_eaten.month == @today.month)
+                        @food_for_today << {'time_eaten': meal.time_eaten, 'name': meal.recipe.name} 
+                  #run through each meals recipes items, 
+                  #then add the fat, carbs, and protein of those to each according variable
+                  end
+		    end
 		end
 
 		@items.each do |item|
 			item.meals.each do |meal|
 				if (meal.time_eaten.day == @today.day) && 
                   (meal.time_eaten.month == @today.month)
-                  @food_for_today << {'time_eaten': meal.time_eaten, 'name': meal.item.name} 
-              end
+                              @food_for_today << {'time_eaten': meal.time_eaten, 'name': meal.item.name} 
+                  #run through each meals recipes items, 
+                  #then add the fat, carbs, and protein of those to each according variable
+                        end
 			end
 		end
 
