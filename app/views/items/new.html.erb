@@ -17,28 +17,26 @@
           <%= f.text_field :name, :value => item["fields"]["item_name"] %>
         </td>
         <td>
-          <%= f.label :nutritionix_id %><br>
-          <%= f.text_field :nutritionix_id, value: item["fields"]["item_id"] %>
+          <%= f.hidden_field :nutritionix_id, value: item["fields"]["item_id"] %>
         </td>
         <td>
           <%= f.label :calories %><br>  
-          <%= f.number_field :calories, :value => item["fields"]["nf_calories"] %>
+          <%= f.number_field :calories, :value => item["fields"]["nf_calories"],  input_html: { style: 'width: 20px', maxlength: 10 } %>
         </td>
         <td>
           <%= f.label :fat_calories %><br>
-          <%= f.number_field :fat, :value => item["fields"]["nf_total_fat"] * 9 %>
+          <%= f.number_field :fat, :value => item["fields"]["nf_total_fat"] * 9,  input_html: { style: 'width: 20px', maxlength: 10 } %>
         </td>
         <td>
           <%= f.label :protein_calories %> <br>
-          <%= f.number_field :protein, :value => item["fields"]["nf_protein"] * 4 %>
+          <%= f.number_field :protein, :value => item["fields"]["nf_protein"] * 4,  input_html: { style: 'width: 20px', maxlength: 10 } %>
         </td>
         <td>
           <%= f.label :carb_calories %> <br>
-          <%= f.text_field :carbs, :value => item["fields"]["nf_total_carbohydrate"] * 4 %>
+          <%= f.text_field :carbs, :value => item["fields"]["nf_total_carbohydrate"] * 4, input_html: { style: 'width: 20px', maxlength: 10 } %>
         </td>
         <td>
-          <%= f.label :serving_weight_grams %><br> 
-          <%= f.number_field :serving_weight_grams, :value => item["fields"]["nf_serving_weight_grams"] %>
+          <%= f.hidden_field :serving_weight_grams, :value => item["fields"]["nf_serving_weight_grams"] %>
         </td>
       </tr>
     </table>
