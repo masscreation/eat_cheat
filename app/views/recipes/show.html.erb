@@ -1,2 +1,26 @@
-<h1>Recipes#show</h1>
-<p>Find me in app/views/recipes/show.html.erb</p>
+<h1><%= @recipe.name %></h1>
+
+<% @recipe.ingredients.each do |ingredient| %> 
+	<table>
+		<thead>
+			<tr>
+				
+				<th><%= "#{ingredient.recipe.name} ingredients" %></th>
+				<th>&nbsp;</th>
+				<th>Calories</th>
+				
+			</tr>
+		</thead>
+		<tr>
+			<td><%= ingredient.item.name %></td>
+			<td>&nbsp;</td>
+			<td><%= ingredient.item.calories %></td>
+		</tr>
+		
+	</table>
+<% end %> 
+<br> 
+
+<%= link_to "Back to Dashboard", '/' %> 
+
+

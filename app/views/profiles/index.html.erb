@@ -36,6 +36,7 @@
 
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
+<<<<<<< HEAD
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
           <span class="sr-only">Toggle navigation</span>
@@ -94,31 +95,67 @@
 
       
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+=======
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Analytics</a></li>
+            <li><a href="#">Export</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><%= link_to "Create a New Recipe", new_user_recipe_path(@user) %></li>
+
+            <li><%= link_to "Create a New Item", new_item_path %> </li>
+            <li><%= link_to "Show all recipies", user_recipes_path(@user) %></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+            <li><a href="">More navigation</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">      
+
+>>>>>>> upstream/master
           <h1 class="page-header">Your Dashboard</h1>
 
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
+              <h4>Ideal</h4>
+              <span id = "chart">
+              </span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
+              <h4>Actual</h4>
+              <span id = "actual">
+              </span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
+              
             </div>
           </div>
 
+<<<<<<< HEAD
+=======
+          <h2 class="sub-header">Daily Food Diary</h2>
+         
+
+              	
+          	<% @user.recipes.each do |recipe| %>
+         
+              <div><%= link_to "#{recipe.name}", user_recipe_path(@user, recipe) %> </div>
+      
+            <% end %> 
+
+          this is form:
+>>>>>>> upstream/master
 
 <!-- Daily Food Diary - selects MEAL by TIME and will be moved to the search page later -->
 
@@ -146,6 +183,7 @@
               <%= f.datetime_local_field :time_eaten  %>
               <%= f.submit "Save meal" %>
               <% end %>
+<<<<<<< HEAD
 
 
 <!-- Datatable for ALL meal display -->
@@ -255,10 +293,50 @@
                       </tr>
                   </tbody>
                 </table>
+=======
+              	 
+            <div class="container">
+  <h2>Food</h2>
+  <p>The .table-striped class adds zebra-stripes to a table:</p>            
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Time of Day</th>
+        <th>Meal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @food_for_today.each do |food| %>
+      <tr>
+        <td>
+          <% if food[:time_eaten].min.between?(0,9) %>
+            <%= food[:time_eaten].hour %>:0<%= food[:time_eaten].min %>
+          <% else %>
+            <%= food[:time_eaten].hour %>:<%= food[:time_eaten].min %>
+          <% end  %>
+        </td>
+      
+        <td><%= food[:name] %></td>
+        
+        
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+    
+              
+>>>>>>> upstream/master
         </div>
 
 
 
+
+
+
+    <%= render "profile_piecharts" %>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

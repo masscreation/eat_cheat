@@ -23,6 +23,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save 
+      current_user.items << @item
       redirect_to items_path
     end
   end
