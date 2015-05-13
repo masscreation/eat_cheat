@@ -4,8 +4,8 @@ class ProfilesController < ApplicationController
 		@user = current_user
 		@meal = Meal.new
 		@recipe_options = current_user.recipes.map { |recipe| [recipe.name, recipe.id] }
-		@item_options = Item.all.map { |item| [item.name, item.id] }
-		@items = Item.all
+		@item_options = current_user.items.map { |item| [item.name, item.id] }
+		@items = current_user.items
 
 		@today = Time.new
 
