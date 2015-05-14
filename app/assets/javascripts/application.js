@@ -98,20 +98,19 @@ $(document).ready(function(){
         hash.item = del;
 
 
-        console.log(string);
-        console.log(col);
-        console.log(hash);
+        $.ajax({
+          type: "POST",
+          url: "/items",
+          data: hash
+        }).success(function(item){
+          alert('yes');
+        }).fail(function(){
+          alert('fail!');
+        });
       }
     }); //end each
 
-    $.ajax({
-      type: "POST",
-      url: "/items",
-      data: hash}).success(function(item){
-        alert('yes');
-      }).fail(function(){
-        alert('fail!');
-      });
+
     
 
 
