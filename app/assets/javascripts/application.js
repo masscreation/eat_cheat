@@ -43,6 +43,7 @@ $(document).ready(function(){
         droppable = true;
         if(original){
              var newDiv = $(ui.draggable).clone();
+             
              newDiv.draggable({
                 stop: function( event, ui ) {
                     if(!droppable)
@@ -58,6 +59,7 @@ $(document).ready(function(){
            ui.helper.css('top','');
            ui.helper.css('left','');
            $(this).append(ui.helper);
+           
         }
       }
     });
