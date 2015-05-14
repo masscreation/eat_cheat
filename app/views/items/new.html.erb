@@ -8,7 +8,7 @@
 
 <% @items.each do |item| %>
        <%= form_for [@item] do |f| %>
-
+  
        <div class='searchItem' style="margin: 55px 0;">
           <div class='searchName'>
                 <h3><%= item["fields"]["item_name"] %></h3>
@@ -22,15 +22,33 @@
             </div>
             <div>
                 <%= f.label :fat_calories %><br>
-                <%= f.hidden_field :fat, :value => item["fields"]["nf_total_fat"],  input_html: { style: 'width: 20px', maxlength: 10 } %> <%= item["fields"]["nf_total_fat"]  %>
+                <% unless item["fields"]["nf_total_fat"].nil?  %>
+                    <%= f.hidden_field :fat, :value => item["fields"]["nf_total_fat"],  input_html: { style: 'width: 20px', maxlength: 10 } %>
+                    <%= item["fields"]["nf_total_fat"]  %>
+                <% else %>
+                    <%= f.hidden_field :fat, :value => 0,  input_html: { style: 'width: 20px', maxlength: 10 } %>
+                    <%= 0 %>
+                <% end %>
             </div>
             <div>
                 <%= f.label :protein_calories %><br>
-                <%= f.hidden_field :protein, :value => item["fields"]["nf_protein"],  input_html: { style: 'width: 20px', maxlength: 10 } %> <%= item["fields"]["nf_protein"] %>
+                <% unless item["fields"]["nf_protein"].nil?  %>
+                    <%= f.hidden_field :protein, :value => item["fields"]["nf_protein"],  input_html: { style: 'width: 20px', maxlength: 10 } %> 
+                    <%= item["fields"]["nf_protein"] %>
+                <% else %>
+                    <%= f.hidden_field :protein, :value => 0,  input_html: { style: 'width: 20px', maxlength: 10 } %> 
+                    <%= 0 %>
+                <% end %>
             </div>
             <div>
                 <%= f.label :carb_calories %> <br>
-                <%= f.hidden_field :carbs, :value => item["fields"]["nf_total_carbohydrate"], input_html: { style: 'width: 20px', maxlength: 10 } %> <%= item["fields"]["nf_total_carbohydrate"] %>
+                <% unless item["fields"]["nf_total_carbohydrate"].nil?  %>
+                    <%= f.hidden_field :carbs, :value => item["fields"]["nf_total_carbohydrate"], input_html: { style: 'width: 20px', maxlength: 10 } %> 
+                    <%= item["fields"]["nf_total_carbohydrate"] %>
+                <% else %>
+                    <%= f.hidden_field :carbs, :value => 0, input_html: { style: 'width: 20px', maxlength: 10 } %> 
+                    <%= 0 %>
+                <% end %>
             </div>
             <div>
                 <%= f.hidden_field :serving_weight_grams, :value => item["fields"]["nf_serving_weight_grams"] %>
