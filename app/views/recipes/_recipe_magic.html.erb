@@ -4,13 +4,14 @@ $(document).ready(function(){
   // grab the 'recipes-con'
   var $recipesCon = $("#recipes-con"); 
 
-     console.log($recipesCon.html()); 
+     var user = location.pathname.split('/')[2]; 
+      var path = location.pathname + '.json';
 
-    $.get("/users/<%= current_user.id %>/recipes")
+    $.get(path)
       .done(function (recipes) {
         console.log("All Recipes:", recipes);
 
-        // append each recipe
+        // append each recipes
         recipes.forEach(function (recipe) {
           $recipesCon.append("<div>" + recipe.name + "</div>"); 
         });
@@ -80,8 +81,18 @@ $(document).ready(function(){
      // add ingredent field to Recipe form
      $("#field_adder").click(function( event ) {
         event.preventDefault();
-        $(".ingredient_fields").append($ingredientField.html()); 
+        $(".ingredient_fields").append("<div class=\"ingredient_field\">" + $ingredientField.html() + "</div>")
+        clicker();
       });
+
+     var clicker = function() {
+      $(".field_remover").click(function( event ) {
+        event.preventDefault();
+        console.log('click'); 
+        this.closest(".ingredient_field").remove()
+        // $($ingredientField).remove(); 
+      });
+    };
 
 }); //end ready
 </script>

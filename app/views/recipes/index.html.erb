@@ -26,13 +26,17 @@
 		      <%= f.text_field :name %>
 	    </div>
 	    <div class="ingredient_fields">
+			<a href="#" id="field_adder">Add ingredient</a><br>
 		    <div class="ingredient_field">
 		    	<%= f.fields_for :ingredient do |b| %> 
 		    		<%= render 'ingredient_form', f: b %> 
-		    	<% end %> 
+		    	<% end %>
+		    	<a href="#" class="field_remover">Remove ingredient</a><br>
 		    </div>
 		</div>
-	    <a href="#" id="field_adder">Add ingredient</a> 
+	     
+
+
 
 	    <div class="actions">
 	      <%= f.submit %>
