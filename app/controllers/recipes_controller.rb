@@ -1,13 +1,23 @@
 class RecipesController < ApplicationController
+  before_action :authenticate_user!
+
   def show
     @user = current_user
     @recipes = current_user.recipes
     @recipe = Recipe.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @recipes }
+    end
   end
 
   def index
     @user = current_user
     @recipes = current_user.recipes
+    @recipe = Recipe.new
+    @item_options = Item.all.map { |item| [item.name, item.id] }
+    @ingredient = Ingredient.new
   end
 
   def new
@@ -19,8 +29,10 @@ class RecipesController < ApplicationController
     @user = current_user
     @recipe = Recipe.new(recipe_params)
     @user.recipes << @recipe 
-    if @recipe.save
-      redirect_to :root
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @recipes }
     end
   end
 
@@ -50,15 +62,25 @@ class RecipesController < ApplicationController
         x.update_attribute('quant_of_item_eaten', @quant)
       end
 
+      respond_to do |format|
+        format.html
+        format.json { render json: @recipe }
+      end
       #need to associate item with recipe
-
-
-      redirect_to :root
-    
   end
 
   def destroy
+    # find the `recipe`
+    recipe = Recipe.find(params[:id])
+    # delete the `recipe`
+    recipe.destroy()
+
+    respond_to do |format|
+      format.html { redirect_to user_recipe_path(@user, @recipe) }
+      format.json { render json: nil, status: 200 }
+    end
   end
+
 
   private
   def recipe_params

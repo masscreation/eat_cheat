@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!  
+
   def show
 
   end
@@ -66,7 +68,7 @@ class ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.all
+    @items = current_user.items.all
 
     respond_to do |format|
       format.html
