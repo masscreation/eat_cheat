@@ -91,4 +91,6 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:nutritionix_id, :calories, :fat, :protein, :carbs, :serving_weight_grams, :name)
   end
+
+  
 end

@@ -103,7 +103,47 @@ $(document).ready(function(){
           url: "/items",
           data: hash
         }).success(function(item){
-          alert('yes');
+          console.log('item created in database!');
+          
+          //create a meal 
+            // find datetime object
+            var $form = $('#checkoutDatetime').closest('form');
+            console.log($form);
+
+            var string = $form.serialize();
+            console.log(string);
+
+            var col = string.split('&');
+            var osc = [];
+            var del = {};
+
+            for(var i = 0; i < col.length; i++){
+              osc = col[i].split("=");
+              console.log(osc[1]);
+              del[osc[0]] = osc[1];
+            }
+
+            var hash = {};
+            hash.meal = del;
+
+            console.log("THIS IS THE HASH");
+            console.log(hash);
+
+            $.ajax({
+              type: "POST",
+              url: "/meals",
+              data: hash
+            }).success(function(meal){
+              console.log('meal created in database!');
+            }).fail(function(){
+              console.log('cannot make a meal');
+            });
+
+            // go through the same thing again
+            // then create ajax request to meal create 
+          //on back end: meal will only have a time. then find last item. associate items.meal << meal 
+          
+
         }).fail(function(){
           alert('fail!');
         });

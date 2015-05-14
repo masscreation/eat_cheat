@@ -1,13 +1,13 @@
 
 <h1>Search for a food item</h1>
- <div id='checkout'>
-        <div>
-            <input type="datetime-local" id="checkoutDatetime">
-            </div>
+ <form id='checkout'>
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
+        <input type="datetime-local" name="time_eaten" id="checkoutDatetime">
         <div id='checkoutButton'>
             Create Meal
         </div>
- </div>
+ </form>
+
 <%= form_tag("/items/new", method: "get") do %>
  <%= label_tag(:q, "Search for:") %>
  <%= text_field_tag(:q) %>
