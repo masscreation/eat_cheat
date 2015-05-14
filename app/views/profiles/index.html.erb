@@ -189,45 +189,38 @@
 <!-- Datatable for ALL meal display -->
         <div class="container">
 
-          <h2><%= link_to "<", root_path(:@date_from => Time.new.beginning_of_day.to_i-1.day, :@date_til => Time.new.end_of_day.to_i-1.day), :class => "ui-button" %></h2>
-
-          <h2><%= link_to "TODAY", root_path(:@date_from => Time.new.beginning_of_day.to_i, :@date_til => Time.new.end_of_day.to_i), :class => "ui-button" %></h2>
-
-          <h2><%= link_to ">", root_path(:@date_from => Time.new.beginning_of_day.to_i+1.day, :@date_til => Time.new.end_of_day.to_i+1.day), :class => "ui-button" %></h2>
-
-
           <h2>Nutrition Log</h2>
 
             <p>Your logged food will display below.</p> 
  
           <!-- Display morning data  -->          
-                <table class="table table-striped">
+                <table id='datatable' cellspacing="0" class="table table-striped">
                   <thead>
                     <tr>
-                      <th class="persist essential" id="co-0">Morning</th>
-                      <th class="optonal" id="co-1">cal</th>
-                      <th class="optonal" id="co-2">carb</th>
-                      <th  class="optonal" id="co-3">prot</th>
-                      <th  class="optonal" id="co-4">fat</th>
+                      <th id="head" scope="col" abbr="Configurations" class="nobg" style="width:50%" >Morning</th>
+                      <th id='h-alt' scope="col" style="width:12%">cal</th>
+                      <th id='h-alt' scope="col" style="width:12%">carb</th>
+                      <th id='h-alt' scope="col" style="width:12%">prot</th>
+                      <th id='h-alt' scope="col" style="width:12%">fat</th>
                     </tr>
                   </thead>
                 <tbody>
-                    <% @food_for_today.each do |food| %>
+                    <% @food_morning.each do |food| %>
                     
                       <tr>
-                        <td class="persist essential" id="co-0"><%= food[:name] %></td>
-                        <td class="optonal" id="co-1"><%= food[:calories] %></td>
-                        <td class="optonal" id="co-2"><%= food[:carbs] %></td>
-                        <td class="optonal" id="co-3"><%= food[:protein] %></td>
-                        <td class="optonal" id="co-4"><%= food[:fat] %></td>
+                        <td><%= food[:name] %></td>
+                        <td><%= food[:calories] %></td>
+                        <td><%= food[:carbs] %></td>
+                        <td><%= food[:protein] %></td>
+                        <td><%= food[:fat] %></td>
                       </tr>
                     <% end %>
                       <tr>              
-                        <td class="persist essential" id="co-0"></td>
-                        <td class="optonal" id="co-1">sum of calories</td>
-                        <td class="optonal" id="co-2">sum of carbs</td>
-                        <td class="optonal" id="co-3">sum of protein</td>
-                        <td class="optonal" id="co-4">sum of fat</td>
+                        <td></td>
+                        <td>sum of calories</td>
+                        <td>sum of carbs</td>
+                        <td>sum of protein</td>
+                        <td>sum of fat</td>
                       </tr>
                   </tbody>
                 </table>
@@ -236,29 +229,29 @@
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th class="persist essential" id="co-0">Midday</th>
-                      <th class="optonal" id="co-1"></th>
-                      <th class="optonal" id="co-2"></th>
-                      <th class="optonal" id="co-3"></th>
-                      <th class="optonal" id="co-4"></th>
+                      <th scope="col" abbr="Configurations" class="nobg" style="width:50%" >Midday</th>
+                      <th id='h-alt' scope="col" style="width:12%">cal</th>
+                      <th id='h-alt' scope="col" style="width:12%">carb</th>
+                      <th id='h-alt' scope="col" style="width:12%">prot</th>
+                      <th id='h-alt' scope="col" style="width:12%">fat</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <% @food_for_today.each do |food| %>
+                    <% @food_midday.each do |food| %>
                       <tr>
-                        <td class="persist essential" id="co-0"><%= food[:name] %></td>
-                        <td class="optonal" id="co-1"><%= food[:calories] %></td>
-                        <td class="optonal" id="co-2"><%= food[:carbs] %></td>
-                        <td class="optonal" id="co-3"><%= food[:protein] %></td>
-                        <td class="optonal" id="co-4"><%=  food[:fat] %></td>
+                        <td><%= food[:name] %></td>
+                        <td><%= food[:calories] %></td>
+                        <td><%= food[:carbs] %></td>
+                        <td><%= food[:protein] %></td>
+                        <td><%=  food[:fat] %></td>
                     <% end %>
                       </tr>
                       <tr>              
-                        <td class="persist essential" id="co-0"></td>
-                        <td class="optonal" id="co-1">sum of calories</td>
-                        <td class="optonal" id="co-2">sum of carbs</td>
-                        <td class="optonal" id="co-3">sum of protein</td>
-                        <td class="optonal" id="co-4">sum of fat</td>
+                        <td></td>
+                        <td>sum of calories</td>
+                        <td>sum of carbs</td>
+                        <td>sum of protein</td>
+                        <td>sum of fat</td>
                       </tr>
                   </tbody>
                 </table>
@@ -267,29 +260,29 @@
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th class="persist essential" id="co-0">Evening</th>
-                      <th class="optonal" id="co-1"></th>
-                      <th class="optonal" id="co-2"></th>
-                      <th class="optonal" id="co-3"></th>
-                      <th class="optonal" id="co-4"></th>
+                      <th scope="col" abbr="Configurations" class="nobg" style="width:50%" >Evening</th>
+                      <th id='h-alt' scope="col" style="width:12%">cal</th>
+                      <th id='h-alt' scope="col" style="width:12%">carb</th>
+                      <th id='h-alt' scope="col" style="width:12%">prot</th>
+                      <th id='h-alt' scope="col" style="width:12%">fat</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <% @food_for_today.each do |food| %>
+                    <% @food_evening.each do |food| %>
                       <tr>
-                        <td class="persist essential" id="co-0"><%= food[:name] %></td>
-                        <td class="optonal" id="co-1"><%= food[:calories] %></td>
-                        <td class="optonal" id="co-2"><%= food[:carbs] %></td>
-                        <td class="optonal" id="co-3"><%= food[:protein] %></td>
-                        <td class="optonal" id="co-4"><%= food[:fat] %></td>
+                        <td><%= food[:name] %></td>
+                        <td><%= food[:calories] %></td>
+                        <td><%= food[:carbs] %></td>
+                        <td><%= food[:protein] %></td>
+                        <td><%= food[:fat] %></td>
                     <% end %>
                       </tr>
                       <tr>              
-                        <td class="persist essential" id="co-0"></td>
-                        <td class="optonal" id="co-1">sum of calories</td>
-                        <td class="optonal" id="co-2">sum of carbs</td>
-                        <td class="optonal" id="co-3">sum of protein</td>
-                        <td class="optonal" id="co-4">sum of fat</td>
+                        <td></td>
+                        <td>sum of calories</td>
+                        <td>sum of carbs</td>
+                        <td>sum of protein</td>
+                        <td>sum of fat</td>
                       </tr>
                   </tbody>
                 </table>
