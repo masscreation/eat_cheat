@@ -10,6 +10,9 @@
   color: green;
 }
 
+.searchName {
+  display: inline-block;
+}
 .searchItem {
   display: block;
 }
@@ -58,4 +61,7 @@
 
 #checkoutButton:active {
   background: black;
+}
+
+.search{
 }

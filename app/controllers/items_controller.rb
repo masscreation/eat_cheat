@@ -45,6 +45,7 @@ class ItemsController < ApplicationController
         @items = []
     end
 
+
   end
 
   def create
@@ -62,7 +63,15 @@ class ItemsController < ApplicationController
 
     if @item.save 
       current_user.items << @item
-      redirect_to items_path
+    end
+
+    respond_to do |format|
+      format.html
+      format.json {
+        if @item.save 
+          current_user.items << @item
+        end
+      }
     end
   end
 
