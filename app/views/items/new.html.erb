@@ -1,5 +1,13 @@
 
 <h1>Search for a food item</h1>
+ <div id='checkout'>
+        <div>
+            <input type="datetime-local" id="checkoutDatetime">
+            </div>
+        <div id='checkoutButton'>
+            Create Meal
+        </div>
+ </div>
 <%= form_tag("/items/new", method: "get") do %>
  <%= label_tag(:q, "Search for:") %>
  <%= text_field_tag(:q) %>
@@ -79,10 +87,5 @@
         </div>
     </form>
 <% end %>
-    <div id='checkout'>
-        <input type="datetime-local" id="checkoutDatetime">
-        <div id='checkoutButton'>
-            Create Meal
-        </div>
-    </div>
+   
 <%= link_to "Back to Dashboard", "/" %> 
