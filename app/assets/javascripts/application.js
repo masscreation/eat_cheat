@@ -24,6 +24,43 @@ $(document).ready(function(){
   search.click(function(){
     $(this).next().slideToggle('show');
   }); //end click
+
+  $('.searchItem').draggable({
+      helper : "clone",
+      cursor: "move",
+      revert: "invalid",
+      stop: function( event, ui ) {
+          original = false;
+      },
+      start: function( event, ui ) {
+          original = true;
+      }
+    });
+
+
+  $('#checkoutPlate').droppable({
+    drop: function( event, ui ) {
+        droppable = true;
+        if(original){
+             var newDiv = $(ui.draggable).clone();
+             newDiv.draggable({
+                stop: function( event, ui ) {
+                    if(!droppable)
+                        ui.helper.remove();
+                },
+                start: function( event, ui ) {
+                    droppable = false;
+                }
+            });
+            $(this).append(newDiv);
+       }
+        else{
+           ui.helper.css('top','');
+           ui.helper.css('left','');
+           $(this).append(ui.helper);
+        }
+      }
+    });
 }); //end ready
 
 
