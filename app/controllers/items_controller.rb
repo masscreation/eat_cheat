@@ -20,16 +20,20 @@ class ItemsController < ApplicationController
 
     #if array is bigger than just one word, runs through the rest and adds those as well
     if query_arr.length > 1 
-     count = query_arr.length - 1
-     index = 1
+      count = query_arr.length - 1
+      index = 1
      
-     count.times do
+      count.times do
         search << "+#{query_arr[index]}"
         index += 1
-     end
+      end
     end
 
-    puts "\n\n\n\n\n\n\n\n\n\n\n\n\n\n SEARCH PARAMS: #{search}"
+    
+
+    @database_items = Item.where('name LIKE ?', "%#{search}%")
+
+
     parse = "fields=item_name%2Cbrand_name%2Citem_id%2Cnf_calories%2Cnf_total_fat%2Cnf_protein%2Cnf_total_carbohydrate%2Cnf_serving_weight_grams&appId=58809d9f&appKey=f0ee2e843b2e4a910d564ccebfc2c1dd" 
     if search 
         resp = Typhoeus.get("https://api.nutritionix.com/v1_1/search/#{search}", params: parse)

@@ -8,6 +8,27 @@
  <%= submit_tag("Search") %>
 <% end %>
 
+<% @database_items.each do |item| %>
+    <div class='searchItem databaseItem' style="margin: 55px 0;">
+        <div class='searchName'>
+            <h3><%= item.name %></h3>
+        </div>
+        <div class='searchResults showMe'>
+            <div><strong>Calories</strong><br/>
+                <%= item.calories %>
+            </div>
+            <div><strong>Fat Calories</strong><br/>
+                <%= item.fat  %>
+            </div>
+            <div><strong>Protein Calories</strong><br/>
+                <%= item.protein %>
+            </div>
+            <div><strong>Carbs Calories</strong><br/>
+                <%= item.carbs  %>
+            </div>
+        </div>
+    </div>
+<% end %>
 
 <% @items.each do |item| %>
        <%= form_for [@item] do |f| %>
