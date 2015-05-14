@@ -4,6 +4,12 @@
     <div id='checkoutPlate'>
         <h1>Checkout</h1>
     </div>
+    <div id='checkout'>
+        <input type="datetime-local" id="checkoutDatetime">
+        <div id='checkoutButton'>
+            Create Meal
+        </div>
+    </div>
 </div>
 
 <%= form_tag("/items/new", method: "get") do %>
