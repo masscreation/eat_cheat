@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
 
         
     search = params[:q]
-    parse = "fields=item_name%2Citem_id%2Cnf_calories%2Cnf_total_fat%2Cnf_protein%2Cnf_total_carbohydrate%2Cnf_serving_weight_grams&appId=58809d9f&appKey=f0ee2e843b2e4a910d564ccebfc2c1dd" 
+    parse = "fields=item_name%2Cbrand_name%2Citem_id%2Cnf_calories%2Cnf_total_fat%2Cnf_protein%2Cnf_total_carbohydrate%2Cnf_serving_weight_grams&appId=58809d9f&appKey=f0ee2e843b2e4a910d564ccebfc2c1dd" 
     if search 
         resp = Typhoeus.get("https://api.nutritionix.com/v1_1/search/#{search}", params: parse)
         @items = JSON.parse(resp.body)['hits']

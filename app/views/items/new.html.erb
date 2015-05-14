@@ -1,10 +1,13 @@
 <h1>Search for a food item</h1>
 <div id='checkoutPlate' style="float:right; width:500px; height:800px; background: rgba(50,50,0,0.2)"></div>
+
+
 <%= form_tag("/items/new", method: "get") do %>
  <%= label_tag(:q, "Search for:") %>
  <%= text_field_tag(:q) %>
  <%= submit_tag("Search") %>
 <% end %>
+
 
 <% @items.each do |item| %>
        <%= form_for [@item] do |f| %>
@@ -12,6 +15,7 @@
        <div class='searchItem' style="margin: 55px 0;">
           <div class='searchName'>
                 <h3><%= item["fields"]["item_name"] %></h3>
+                <%= item["fields"]["brand_name"] %>
                 <%= f.hidden_field :name, :value => item["fields"]["item_name"] %> 
                 <%= f.hidden_field :nutritionix_id, value: item["fields"]["item_id"] %>
           </div>
