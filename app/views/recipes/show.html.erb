@@ -1,26 +1,49 @@
-<h1><%= @recipe.name %></h1>
+<div class="container">
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
 
-<% @recipe.ingredients.each do |ingredient| %> 
-	<table>
-		<thead>
-			<tr>
-				
-				<th><%= "#{ingredient.recipe.name} ingredients" %></th>
-				<th>&nbsp;</th>
-				<th>Calories</th>
-				
-			</tr>
-		</thead>
-		<tr>
-			<td><%= ingredient.item.name %></td>
-			<td>&nbsp;</td>
-			<td><%= ingredient.item.calories %></td>
-		</tr>
-		
-	</table>
-<% end %> 
-<br> 
+			<table>
+				<thead>
+					<tr>
+						<th>
+							<h2><%= @recipe.name %></h2>
+						</th>
+						<th>&nbsp;</th>
+						<th>
+							<%= button_to "Edit", edit_user_recipe_path(@user, @recipe), method: 'get' %>
+						</th>
+						<th>
+							<%= button_to "Destroy", user_recipe_path(@user, @recipe), method: 'delete', data: { confirm: 'Are you sure?' } %>
+						</th>
+					</tr>
+				</thead>
+			</table>	
+			<% @recipe.ingredients.each do |ingredient| %> 
+				<table>
+					<thead>
+						<tr>
+							
+							<th>Ingredients</th>
+							<th>&nbsp;</th>
+							<th>Calories</th>
+							
+						</tr>
+					</thead>
+					<tr>
+						<td><%= ingredient.item.name %></td>
+						<td>&nbsp;</td>
+						<td><%= ingredient.item.calories %></td>
 
-<%= link_to "Back to Dashboard", '/' %> 
+					</tr>
+					
+				</table>
+			<% end %> 
+			<br> 
+			<%= link_to "Back to Dashboard", '/' %> 
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+</div>
 
 
