@@ -197,7 +197,7 @@
                 <table id='datatable' cellspacing="0" class="table table-striped">
                   <thead>
                     <tr>
-                      <th id="head" scope="col" abbr="Configurations" class="nobg" style="width:50%" >Morning</th>
+                      <th id="head" scope="col" class="nobg" style="width:50%">Morning</th>
                       <th id='h-alt' scope="col" style="width:12%">cal</th>
                       <th id='h-alt' scope="col" style="width:12%">carb</th>
                       <th id='h-alt' scope="col" style="width:12%">prot</th>
@@ -205,22 +205,30 @@
                     </tr>
                   </thead>
                 <tbody>
+                    <% cal = 0 %> <% carb = 0 %> <% prot = 0 %> <% fat = 0 %>
                     <% @food_morning.each do |food| %>
                     
                       <tr>
-                        <td><%= food[:name] %></td>
+                        <td class='name'><%= food[:name] %></td>
                         <td><%= food[:calories] %></td>
+                        <% cal += food[:calories] %>
+
                         <td><%= food[:carbs] %></td>
+                        <% carb += food[:carbs] %>
+
                         <td><%= food[:protein] %></td>
+                        <% prot += food[:protein] %>
+
                         <td><%= food[:fat] %></td>
+                        
                       </tr>
                     <% end %>
-                      <tr>              
-                        <td></td>
-                        <td>sum of calories</td>
-                        <td>sum of carbs</td>
-                        <td>sum of protein</td>
-                        <td>sum of fat</td>
+                      <tr>      
+                        <td class='name' style='font-weight:bold;'>My totals</td>
+                        <td><%= cal %></td>
+                        <td><%= carb %></td>
+                        <td><%= prot %></td>
+                        <td>will be added once fat isnt diplaying my date anymore</td>
                       </tr>
                   </tbody>
                 </table>
@@ -237,21 +245,30 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <% cal = 0 %> <% carb = 0 %> <% prot = 0 %> <% fat = 0 %>
                     <% @food_midday.each do |food| %>
+                    
                       <tr>
-                        <td><%= food[:name] %></td>
+                        <td class='name'><%= food[:name] %></td>
                         <td><%= food[:calories] %></td>
+                        <% cal += food[:calories] %>
+
                         <td><%= food[:carbs] %></td>
+                        <% carb += food[:carbs] %>
+
                         <td><%= food[:protein] %></td>
-                        <td><%=  food[:fat] %></td>
-                    <% end %>
+                        <% prot += food[:protein] %>
+
+                        <td><%= food[:fat] %></td>
+                        
                       </tr>
-                      <tr>              
-                        <td></td>
-                        <td>sum of calories</td>
-                        <td>sum of carbs</td>
-                        <td>sum of protein</td>
-                        <td>sum of fat</td>
+                    <% end %>
+                      <tr>      
+                        <td class='name' style='font-weight:bold;'>My totals</td>
+                        <td><%= cal %></td>
+                        <td><%= carb %></td>
+                        <td><%= prot %></td>
+                        <td>will be added once fat isnt diplaying my date anymore</td>
                       </tr>
                   </tbody>
                 </table>
@@ -267,24 +284,31 @@
                       <th id='h-alt' scope="col" style="width:12%">fat</th>
                     </tr>
                   </thead>
-                  <tbody>
+                    <% cal = 0 %> <% carb = 0 %> <% prot = 0 %> <% fat = 0 %>
                     <% @food_evening.each do |food| %>
+                    
                       <tr>
-                        <td><%= food[:name] %></td>
+                        <td class='name'><%= food[:name] %></td>
                         <td><%= food[:calories] %></td>
+                        <% cal += food[:calories] %>
+
                         <td><%= food[:carbs] %></td>
+                        <% carb += food[:carbs] %>
+
                         <td><%= food[:protein] %></td>
+                        <% prot += food[:protein] %>
+
                         <td><%= food[:fat] %></td>
+                        
+                      </tr>
                     <% end %>
+                      <tr>      
+                        <td class='name' style='font-weight:bold;'>My totals</td>
+                        <td><%= cal %></td>
+                        <td><%= carb %></td>
+                        <td><%= prot %></td>
+                        <td>will be added once fat isnt diplaying my date anymore</td>
                       </tr>
-                      <tr>              
-                        <td></td>
-                        <td>sum of calories</td>
-                        <td>sum of carbs</td>
-                        <td>sum of protein</td>
-                        <td>sum of fat</td>
-                      </tr>
-                  </tbody>
                 </table>
 =======
               	 
