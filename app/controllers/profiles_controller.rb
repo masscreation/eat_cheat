@@ -59,6 +59,7 @@ class ProfilesController < ApplicationController
                   @fat += meal.item.fat
                   @protein += meal.item.protein
                   @carbs += meal.item.carbs
+                  @total_calories = @fat + @protein + @carbs
             end
 		      end
 	      end

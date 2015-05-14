@@ -1,7 +1,4 @@
-<h1>Recipes#edit</h1>
-<p>Find me in app/views/recipes/edit.html.erb</p>
-
-<%= @recipe.name  %>
+<h1>Update Your <%= @recipe.name %> Recipe </h1>
 
 <hr/>
 
@@ -20,7 +17,7 @@
       <%= f.submit "Add item to recipe" %>
     <% end %>
     <div>
-      <%= link_to "Back to Recipes", user_recipes_path(@recipe) %> 
+      <%= link_to "Back to #{@recipe.name}", user_recipe_path(@user, @recipe) %> 
     </div>
   </div>
 
