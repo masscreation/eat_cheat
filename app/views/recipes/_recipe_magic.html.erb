@@ -77,18 +77,19 @@ $(document).ready(function(){
      //hide the recipe form
       $recipeForm.hide();
 
-      $('#form_adder').click(function (event) {
+      $('.form_hider').click(function (event) {
       event.preventDefault();
       console.log('click');
-      $('#form_hider').html("<div id=\"form_hider\">Hide Form</div>");  
       $recipeForm.hide(); 
+      $('#form_hider').html("<div id=\"form_adder\"><a href=\"#\">Create a New Recipe</a></div>");  
+      
      }); 
 
       //unhide the recipe form
      $('#form_adder').click(function (event) {
       event.preventDefault();
       console.log('click');
-      $('#form_adder').html("<div id=\"form_hider\">Hide Form</div>");  
+      $('#form_adder').html("<div id=\"form_hider\"><a href=\"#\">Hide Form</a></div>");  
       $recipeForm.show(); 
      }); 
 
