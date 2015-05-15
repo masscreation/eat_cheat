@@ -51,7 +51,8 @@ $('#calcButton').click(function(){
     $('#calcBar').html("");
     $('#checkout').slideDown('show');
     $('#createItem').slideDown('show');
-    $('#calcNeed').html('Calories compared to your daily need:')
+    $('#calcNeed').html('Calories compared<br/>to your daily need:');
+    $('#pie').html('Caloric breakdown:');
 
     var prot = 0,
         carbs = 0,
@@ -90,9 +91,8 @@ $('#calcButton').click(function(){
 
       
     }); //end each
-    console.log(prot);
-    console.log(carbs);
-    console.log(fat);
+
+  
     pieChart('#calcPie', prot, carbs, fat);
     calGraph('#calcBar', cal, <%= @cal_need %>);
 
