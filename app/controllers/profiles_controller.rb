@@ -12,6 +12,7 @@ class ProfilesController < ApplicationController
     @fat = 0
     @protein = 0
     @carbs = 0
+    @calories = 0
 
     #associate food with time_eaten:
 	@today = Time.new
@@ -80,13 +81,14 @@ current_user.recipes.each do |recipe|
           @food_evening << { 'name': meal.recipe.name, 'calories': @cal_per_recipe, 'carbs': @carb_per_recipe, 
           'protein': @prot_per_recipe, 'fat': @fat_per_recipe}
         end
-
+        @calories += item.calories
       end #if filter today
         #connect recipe-data for charts
         meal.recipe.items.each do |item|
           @fat += item.fat
           @protein += item.protein
           @carbs += item.carbs
+          
         end
     end #3-do
   end #2-do
@@ -113,16 +115,18 @@ end #Index
         if (meal.time_eaten.hour.between?(0,11.5))
             @food_morning << {'time_eaten': meal.time_eaten, 'name': meal.item.name, 'fat': meal.item.fat.round(1), 'protein': meal.item.protein.round(1), 'carbs': meal.item.carbs.round(1), 'calories': meal.item.calories } 
         elsif (meal.time_eaten.hour.between?(11.6,17.5))
-            @food_midday << {'time_eaten': meal.time_eaten, 'name': meal.item.name, 'fat': meal.item.fat..round(1), 'protein': meal.item.protein.round(1), 'carbs': meal.item.carbs.round(1), 'calories': meal.item.calories } 
+            @food_midday << {'time_eaten': meal.time_eaten, 'name': meal.item.name, 'fat': meal.item.fat.round(1), 'protein': meal.item.protein.round(1), 'carbs': meal.item.carbs.round(1), 'calories': meal.item.calories } 
         else (meal.time_eaten.hour.between?(17.6,23.9))
            @food_evening << {'time_eaten': meal.time_eaten, 'name': meal.item.name, 'fat': meal.item.fat.round(1), 'protein': meal.item.protein.round(1), 'carbs': meal.item.carbs.round(1), 'calories': meal.item.calories }            
         end
+        @calories += meal.item.calories
       end #if filter today
 
           #connect recipe-data for charts
           @fat += meal.item.fat
           @protein += meal.item.protein
           @carbs += meal.item.carbs
+
     end
 end
 

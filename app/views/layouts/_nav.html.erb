@@ -14,7 +14,7 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to 'Dashboard', root_path(current_user) %></li>
-          <li><%= link_to 'My Profile', new_user_profile_path(current_user[:id]) %></li>
+          <li><%= link_to 'Create Profile', new_user_profile_path(current_user[:id]) %></li>
          
           <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %> </li>
           <li><%= link_to "Create a New Recipe", new_user_recipe_path(current_user) %></li>

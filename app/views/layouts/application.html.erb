@@ -6,12 +6,11 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 
-  
 </head>
 <body>
 	  <div class="row">
-	    <div class="col-md-7 col-md-offset-2"></div>
-	    <div class="col-md-7 col-md-offset-2">
+	    <div class="col-md-8 col-md-offset-2"></div>
+	    <div class="col-md-8 col-md-offset-2">
 		<% if user_signed_in? %>
       <%= render 'layouts/nav' %>  
 		Signed in as <%= current_user.email %>. Not you? 
