@@ -1,6 +1,19 @@
+<div class="container-full">
 
-<div class="row-fluid">
-  <div class="span4 well">
+      
+       <div class="col-md-8 text-center v-center">
+        <div class="row">
+        <div class="col-md-8 text-center v-center">
+          <div class="row"></div>
+          
+          <h1>EAT CHEAT</h1>
+          <p class="lead">Easy-to-use nutrition tracker and visualization tool.</p>
+         
+
+          <div id="signin" class="row"></div>
+
+
+          <br>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <fieldset>
           <legend><h2>Please Log In</h2></legend>
@@ -30,5 +43,52 @@
     <% end %>
     <%= render "devise/shared/links" %>
   </div>
+</div>
+      </div>
+</div>  
+       <!-- /row -->
+  
+      <div class="row">
+       
+        <div class="col-md-12 text-center v-center" style="font-size:39pt;">
+          <a href="#"><i class="icon-google-plus"></i></a> <a href="#"><i class="icon-facebook"></i></a>  <a href="#"><i class="icon-twitter"></i></a> <a href="#"><i class="icon-github"></i></a> <a href="#"><i class="icon-pinterest"></i></a>
+        </div>
+      
+      </div>
+  
+    <br><br><br><br><br>
+
+</div> <!-- /container full -->
+
+<div class="container">
+  <div class="col-md-12">
+  <div class="row"><hr></div>
+  </div>
+  <div class="col-md-12">
+    <div class="row">
+        <div class="col-md-3">
+          <div class="panel panel-default">
+            <div class="panel-heading"><h3>SEARCH</h3></div>
+            <div class="panel-body">The ellaborate search engine will find common foods and drinks, meals from popular restaurants as well as your own recipes.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="panel panel-default">
+            <div class="panel-heading"><h3>GLOG</h3></div>
+            <div class="panel-body">Log your daily foods and it will graph out your macronutrients.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="panel panel-default">
+            <div class="panel-heading"><h3>EAT BETTER</h3></div>
+            <div class="panel-body">Eat Cheat calculates your specific energy needs tell you if you have reached your energy needs yet.
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+
 </div>
 

@@ -115,7 +115,7 @@ end #Index
         if (meal.time_eaten.hour.between?(0,11.5))
             @food_morning << {'time_eaten': meal.time_eaten, 'name': meal.item.name, 'fat': meal.item.fat.round(1), 'protein': meal.item.protein.round(1), 'carbs': meal.item.carbs.round(1), 'calories': meal.item.calories } 
         elsif (meal.time_eaten.hour.between?(11.6,17.5))
-            @food_midday << {'time_eaten': meal.time_eaten, 'name': meal.item.name, 'fat': meal.item.fat..round(1), 'protein': meal.item.protein.round(1), 'carbs': meal.item.carbs.round(1), 'calories': meal.item.calories } 
+            @food_midday << {'time_eaten': meal.time_eaten, 'name': meal.item.name, 'fat': meal.item.fat.round(1), 'protein': meal.item.protein.round(1), 'carbs': meal.item.carbs.round(1), 'calories': meal.item.calories } 
         else (meal.time_eaten.hour.between?(17.6,23.9))
            @food_evening << {'time_eaten': meal.time_eaten, 'name': meal.item.name, 'fat': meal.item.fat.round(1), 'protein': meal.item.protein.round(1), 'carbs': meal.item.carbs.round(1), 'calories': meal.item.calories }            
         end

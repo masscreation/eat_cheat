@@ -92,21 +92,7 @@
               <div>
                 <%= f.submit "Save meal" %>
               </div>
-              <% end %>
-              
-
-
-
-<!-- Datatable for ALL meal display -->
-      <div class="container">
-        <div class="col-md-9">
-
-          <h2><%= link_to "Yesterday", root_path(:@date_from => Time.new.beginning_of_day.to_i-1.day, :@date_til => Time.new.end_of_day.to_i-1.day), :class => "ui-button" %></h2>
-
-          <h2><%= link_to "TODAY", root_path(:@date_from => Time.new.beginning_of_day.to_i, :@date_til => Time.new.end_of_day.to_i), :class => "ui-button" %></h2>
-
-          <h2><%= link_to "Tomorrow", root_path(:@date_from => Time.new.beginning_of_day.to_i+1.day, :@date_til => Time.new.end_of_day.to_i+1.day), :class => "ui-button" %></h2>
-          
+              <% end %>          
 
 
           <h2>Nutrition Log</h2>
