@@ -16,9 +16,8 @@
 <%= form_tag({:controller => "items", :action => "new"}, :method => "get", :id => "nis") do -%>
  <%= label_tag(:q, "Search for:") %>
  <%= text_field_tag(:q) %>
- <%= submit_tag("Search") %>
 <% end %>
-<button id ='searchAPI'>Search</button>
+<button id='searchAPI'>Search</button>
 
 <div id = 'searchFolder'>
 
@@ -72,5 +71,6 @@
 </div>
 
 <%= render "items_piecharts" %>
+<%= render "items_ajax" %>
    
 <%= link_to "Back to Dashboard", "/" %> 
