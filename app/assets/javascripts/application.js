@@ -35,6 +35,8 @@ $(document).ready(function(){
 
   $('#calcButton').click(function(){
     $('#calcPie').html("");
+    $('#checkout').slideDown('show');
+    $('#createItem').slideDown('show');
 
     var prot = 0,
         carbs = 0,

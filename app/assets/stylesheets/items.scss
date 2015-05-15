@@ -6,6 +6,10 @@
   display: none;
 }
 
+.hidden {
+  display: none;
+}
+
 .dropped {
   color: green;
 }
@@ -31,23 +35,38 @@
 }
 
 #sidebar{
-  height:850px;
-  width: 500px;
-  float:right;  
+  width: 250px;
+  float:right;
+  margin: 10px;  
 }
 
-#checkoutPlate {  
-  width:500px; 
-  height:800px; 
-  background: rgba(50,50,0,0.2);
-  margin: 0 0 0 50px;
-  padding: 0 25px;
-  float:right;
+#createItem {
+  display: block;
+  width: 235px;
+  height: 50px;
+  background: #d35400;
+  text-align:center;
+  color: white;
+  font-size: 35px;
+  margin: 10px 0 0 0;
+}
+
+#createItem:hover {
+  opacity: 0.7;
+}
+
+#createItem:active {
+  background: black;
 }
 
 #checkout{
-  margin: 10px 15px;
-  float:right;
+  margin: 20px 0;
+}
+
+#checkout p{
+  text-align: center;
+  font-size: 20px;
+  margin: 20px 10px 0 0;
 }
 
 #checkoutButton{
@@ -65,7 +84,7 @@
   display: block;
   width: 235px;
   height: 50px;
-  background: green;
+  background: #27ae60;
   text-align:center;
   color: white;
   font-size: 35px;
@@ -108,4 +127,10 @@
 
 #nis{
   display: inline-block;
+}
+
+#message{
+  font-size: 30px;
+  text-align: center;
+  margin: 10px;
 }

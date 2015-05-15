@@ -1,8 +1,11 @@
 <script>
   var handle = 0;
 
-  $('#searchAPI').click(function(){
+  $('#searchAPI').click(function(event){
+    event.preventDefault();
     var $check = $('form > .checker');
+
+    $('#message').html('');
 
     $check.each(function(index){
       var osc = [];
@@ -78,16 +81,57 @@
 
   }); //end click
 
+  $('#createItem').click(function(){
+    console.log('hi');
+    var hash = {};
+    var $check = $('form > .checker');
+
+    // run through the checkbox of each searchItem
+    $check.each(function(index){
+      var string = "";
+      var col = [];
+      var osc = [];
+      var del = {};
+
+      if ($(this).is(':checked')){
+        //console logs out that checkbox's parent's form
+        var $form = $(this).closest('form');
+        console.log($form);
+
+        string = $form.serialize();
+        col = string.split('&');
+        
+
+        for(var i = 0; i < col.length; i++){
+          osc = col[i].split("=");
+          console.log(osc[1]);
+          del[osc[0]] = osc[1];
+        }
+
+        hash.item = del;
+
+        $.ajax({
+          type: "POST",
+          url: "/items",
+          data: hash
+        }).success(function(item){
+          console.log('item created in database!');
+        }).fail(function(){
+          alert('fail!');
+        });
+      }
+
+    }); //end each
+
+    $('#message').html('Item(s) have been added!');
+  });//end click
+
   $('#checkoutButton').click(function(){
     var checkBut = $('#checkout').find('input')[0];
     checkBut.value = "<%= form_authenticity_token %>";
-    console.log(checkBut.value);
-
 
     var hash = {};
     var $check = $('form > .checker');
-    console.log($check.length);
-    console.log("HI HI HI HI HI");
 
     // run through the checkbox of each searchItem
     $check.each(function(index){
