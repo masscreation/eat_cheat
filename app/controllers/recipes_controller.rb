@@ -78,7 +78,7 @@ class RecipesController < ApplicationController
     # find the `recipe`
     recipe = Recipe.find(params[:id])
     # delete the `recipe`
-    recipe.destroy()
+    recipe.destroy
 
     respond_to do |format|
       format.html { redirect_to user_recipe_path(@user, @recipe) }

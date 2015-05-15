@@ -2,9 +2,10 @@ class MealsController < ApplicationController
 	before_filter :authenticate_user!
 	def create
 		@meal = Meal.new(meal_params)
-		item = Item.last
 
 		if (@meal.item_id.nil? && @meal.recipe_id.nil?)
+			item = Item.last
+			
 			time = meal_params['time_eaten'].split('T')
 			year_mon_day = time[0].split('-')
 			hour_min = time[1].split('%3A')
@@ -13,7 +14,6 @@ class MealsController < ApplicationController
 			@meal.time_eaten = date
 
 			if @meal.save
-				
 				meal = Meal.last
 				item.meals << meal
 				redirect_to :root
