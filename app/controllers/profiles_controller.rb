@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-
+  before_filter :authenticate_user!
 
 	def index
     @user = current_user
@@ -54,7 +54,7 @@ current_user.recipes.each do |recipe|
 
           #create array with all recipes eaten for morning
           @food_morning << { 'name': meal.recipe.name, 'calories': @cal_per_recipe, 'carbs': @carb_per_recipe, 
-          'protein': @prot_per_recipe, 'fat': meal.time_eaten}
+          'protein': @prot_per_recipe, 'fat': @fat_per_recipe}
         end
 
         # MIDDAY:
@@ -66,7 +66,7 @@ current_user.recipes.each do |recipe|
 
           #create array with all recipes eaten for midday
           @food_midday << { 'name': meal.recipe.name, 'calories': @cal_per_recipe, 'carbs': @carb_per_recipe, 
-          'protein': @prot_per_recipe, 'fat': meal.time_eaten}
+          'protein': @prot_per_recipe, 'fat': @fat_per_recipe}
         end
 
         # EVENING:
@@ -78,7 +78,7 @@ current_user.recipes.each do |recipe|
 
         #create array with all recipes eaten for evening
         @food_evening << { 'name': meal.recipe.name, 'calories': @cal_per_recipe, 'carbs': @carb_per_recipe, 
-        'protein': @prot_per_recipe, 'fat': meal.time_eaten}
+        'protein': @prot_per_recipe, 'fat': @fat_per_recipe}
         end
 
       end #if filter today
@@ -102,11 +102,11 @@ end #1-do
       if (meal.time_eaten.day == @today.day)
         #select items only eaten today
         if (meal.time_eaten.hour.between?(0,11.5))
-            @food_morning << {'time_eaten': meal.time_eaten, 'name': meal.item.name, 'fat': meal.time_eaten, 'protein': meal.item.protein, 'carbs': meal.item.carbs, 'calories': meal.item.calories } 
+            @food_morning << {'time_eaten': meal.time_eaten, 'name': meal.item.name, 'fat': meal.item.fat.round(1), 'protein': meal.item.protein.round(1), 'carbs': meal.item.carbs.round(1), 'calories': meal.item.calories } 
         elsif (meal.time_eaten.hour.between?(11.6,17.5))
-            @food_midday << {'time_eaten': meal.time_eaten, 'name': meal.item.name, 'fat': meal.time_eaten, 'protein': meal.item.protein, 'carbs': meal.item.carbs, 'calories': meal.item.calories } 
+            @food_midday << {'time_eaten': meal.time_eaten, 'name': meal.item.name, 'fat': meal.item.fat..round(1), 'protein': meal.item.protein.round(1), 'carbs': meal.item.carbs.round(1), 'calories': meal.item.calories } 
         else (meal.time_eaten.hour.between?(17.6,23.9))
-           @food_evening << {'time_eaten': meal.time_eaten, 'name': meal.item.name, 'fat': meal.time_eaten, 'protein': meal.item.protein, 'carbs': meal.item.carbs, 'calories': meal.item.calories }            
+           @food_evening << {'time_eaten': meal.time_eaten, 'name': meal.item.name, 'fat': meal.item.fat.round(1), 'protein': meal.item.protein.round(1), 'carbs': meal.item.carbs.round(1), 'calories': meal.item.calories }            
         end
       end #if filter today
 
@@ -125,6 +125,35 @@ redirect_to '/users/sign_in'
 end
 
   end #end-index
+
+  def edit
+    @user = current_user
+    @profile = Profile.new
+      
+  end
+
+  def new
+    @user = current_user
+    @profile = Profile.new
+  end
+
+  def create
+    @profile = current_user.profiles.new(profile_params)
+    @user = current_user
+    if @profile.save
+    redirect_to :root
+    end
+  end
+
+  def show
+    @user = current_user
+    @profile = Profile.new
+  end
+
+  private
+  def profile_params
+    params.require(:profile).permit(:name, :age, :gender, :height, :weight, :activity_level)
+  end
 
 end #end-class
 

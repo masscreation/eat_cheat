@@ -49,80 +49,21 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#">Dashboard</a></li>
-          <li><a href="#">Settings</a></li>
-          <li><a href="#">Profile</a></li>
-          <li><a href="#">Help</a></li>
+          <li><%= link_to 'My Profile', new_user_profile_path(@user[:id]) %></li>
+         
+          <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %> </li>
           <li><%= link_to "Create a New Recipe", new_user_recipe_path(@user) %></li>
-          <li><%= link_to "Create a New Item", new_item_path %> </li>
+          <li><%= link_to "Create a New Item", new_item_path %></li>
           <li><%= link_to "Show all recipies", user_recipes_path(@user) %></li>
         </ul>
       </div>
     </div>
   </nav>
-                      <!-- second Navbar commented out because Navigation is sufficuient on top -->
-
-                      <!--           <form class="navbar-form navbar-right">
-                                  <input type="text" class="form-control" placeholder="Search...">
-                                </form> -->
-
-
-                          <!-- <div class="container-fluid">
-                            <div class="row">
-                              <div class="col-sm-3 col-md-2 sidebar">
-                                <ul class="nav nav-sidebar">
-                                  <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-                                  <li><a href="#">Reports</a></li>
-                                  <li><a href="#">Analytics</a></li>
-                                  <li><a href="#">Export</a></li>
-                                </ul>
-                                <ul class="nav nav-sidebar">
-                                  <li><%= link_to "Create a New Recipe", new_user_recipe_path(@user) %></li>
-                                  <li><%= link_to "Create a New Item", new_item_path %> </li>
-                                  <li><%= link_to "Show all recipies", user_recipes_path(@user) %></li>
-                                  <li><a href="">One more nav</a></li>
-                                  <li><a href="">Another nav item</a></li>
-                                  <li><a href="">More navigation</a></li>
-                                </ul>
-                                <ul class="nav nav-sidebar">
-                                  <li><a href="">Nav item again</a></li>
-                                  <li><a href="">One more nav</a></li>
-                                  <li><a href="">Another nav item</a></li>
-                                </ul>
-                              </div> -->
-
-
-<!-- Placeholder for where partial with data analysis will go -->
 
       
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<div id="jumbotron" class="jumbotron">
 
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">Export</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><%= link_to "Create a New Recipe", new_user_recipe_path(@user) %></li>
-
-            <li><%= link_to "Create a New Item", new_item_path %> </li>
-            <li><%= link_to "Show all recipies", user_recipes_path(@user) %></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-            <li><a href="">More navigation</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-          </ul>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">      
-
-
-          <h1 class="page-header">Your Dashboard</h1>
+          <h2 class="page-header">Dashboard</h2>
 
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder">
@@ -137,11 +78,8 @@
               <span id = "actual">
               </span>
             </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              
-            </div>
           </div>
-
+</div> 
 
          
 <!-- Daily Food Diary - selects MEAL by TIME and will be moved to the search page later -->
@@ -150,11 +88,12 @@
          <%= form_for [@meal] do |f| %>
            <% if @meal.errors.any? %>
             <div id="error_explanation">
-             <h2><%= pluralize(@meal.errors.count, "error") %> prohibited this meal from being saved:</h2>
-
+             <h2>
+              <%= pluralize(@meal.errors.count, "error") %> prohibited this meal from being saved:
+            </h2>
               <ul>
-              <% @meal.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
+                <% @meal.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
               </ul>
             </div>
               <% end %>
@@ -184,13 +123,15 @@
 
 
 <!-- Datatable for ALL meal display -->
-        <div class="container">
+      <div class="container">
+        <div class="col-md-9">
 
           <h2><%= link_to "Yesterday", root_path(:@date_from => Time.new.beginning_of_day.to_i-1.day, :@date_til => Time.new.end_of_day.to_i-1.day), :class => "ui-button" %></h2>
 
           <h2><%= link_to "TODAY", root_path(:@date_from => Time.new.beginning_of_day.to_i, :@date_til => Time.new.end_of_day.to_i), :class => "ui-button" %></h2>
 
           <h2><%= link_to "Tomorrow", root_path(:@date_from => Time.new.beginning_of_day.to_i+1.day, :@date_til => Time.new.end_of_day.to_i+1.day), :class => "ui-button" %></h2>
+          
 
 
           <h2>Nutrition Log</h2>
@@ -224,6 +165,7 @@
                         <% prot += food[:protein] %>
 
                         <td><%= food[:fat] %></td>
+                        <% fat += food[:fat] %>
                         
                       </tr>
                     <% end %>
@@ -232,7 +174,7 @@
                         <td><%= cal %></td>
                         <td><%= carb %></td>
                         <td><%= prot %></td>
-                        <td>will be added once fat isnt diplaying my date anymore</td>
+                        <td><%= fat %></td>
                       </tr>
                   </tbody>
                 </table>
@@ -264,6 +206,7 @@
                         <% prot += food[:protein] %>
 
                         <td><%= food[:fat] %></td>
+                        <% fat += food[:fat] %>
                         
                       </tr>
                     <% end %>
@@ -272,7 +215,7 @@
                         <td><%= cal %></td>
                         <td><%= carb %></td>
                         <td><%= prot %></td>
-                        <td>will be added once fat isnt diplaying my date anymore</td>
+                        <td><%= fat %></td>
                       </tr>
                   </tbody>
                 </table>
@@ -303,6 +246,7 @@
                         <% prot += food[:protein] %>
 
                         <td><%= food[:fat] %></td>
+                        <% fat += food[:fat] %>
                         
                       </tr>
                     <% end %>
@@ -311,9 +255,11 @@
                         <td><%= cal %></td>
                         <td><%= carb %></td>
                         <td><%= prot %></td>
-                        <td>will be added once fat isnt diplaying my date anymore</td>
+                        <td><%= fat %></td>
                       </tr>
                 </table>
+              </div> <!-- class width -->
+              </div> <!-- container -->
 
               	 
 
