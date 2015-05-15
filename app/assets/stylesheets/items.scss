@@ -10,6 +10,9 @@
   color: green;
 }
 
+.searchName {
+  display: inline-block;
+}
 .searchItem {
   display: block;
 }
@@ -38,12 +41,13 @@
 }
 
 #checkout{
-  margin: 10px 136px;
+  margin: 10px 15px;
+  float:right;
 }
 
 #checkoutButton{
-  display: inline-block;
-  width: 220px;
+  display: block;
+  width: 235px;
   height: 50px;
   background: red;
   text-align:center;
@@ -52,10 +56,29 @@
   margin: 10px 0 0 0;
 }
 
+#calcButton{
+  display: block;
+  width: 235px;
+  height: 50px;
+  background: green;
+  text-align:center;
+  color: white;
+  font-size: 35px;
+  margin: 10px 0 0 0;
+}
+
+#checkoutDatetime{
+  display: block;
+}
+
+
 #checkoutButton:hover {
   opacity: 0.7;
 }
 
 #checkoutButton:active {
   background: black;
+}
+
+.search{
 }
