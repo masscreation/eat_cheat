@@ -54,10 +54,21 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
 
+    # turn fat carbs and protein into calories, not grams
     @item.fat *= 9
     @item.protein *= 4
     @item.carbs *= 4
 
+    # check that item name is displayed correctly
+    name = @item.name.split('+');
+
+    if (name.length == 1)
+      @item.name = name
+    else
+      @item.name = name.join(' ');
+    end
+
+    puts "\n\n\n\n\n\n\n\n\n\n\n\n\n #{@item.name}"
 
     if @item.save 
       current_user.items << @item

@@ -51,6 +51,14 @@
   margin: 10px 0 0 0;
 }
 
+#createItem:hover {
+  opacity: 0.7;
+}
+
+#createItem:active {
+  background: black;
+}
+
 #checkout{
   margin: 20px 0;
 }
