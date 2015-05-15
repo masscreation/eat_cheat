@@ -18,7 +18,7 @@
          
           <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %> </li>
           <li><%= link_to "Create a New Recipe", new_user_recipe_path(current_user) %></li>
-          <li><%= link_to "Create a New Item", new_item_path %></li>
+          <li><%= link_to "Create New Items", new_item_path %></li>
           <li><%= link_to "Show all recipies", user_recipes_path(current_user) %></li>
         </ul>
       </div>
