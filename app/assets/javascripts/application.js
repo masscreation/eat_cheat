@@ -65,6 +65,50 @@ $(document).ready(function(){
   // });
 
   //create string with info to send
+
+  $('#calcButton').click(function(){
+    $('#calcPie').html("");
+
+    var prot = 0,
+        carbs = 0,
+        fat = 0;
+
+    var $check = $('form > .checker');
+
+
+   
+
+    $check.each(function(index){
+      var osc = [];
+      var del = {};
+      if ($(this).is(':checked')){
+        var $form = $(this).closest('form');
+
+        string = $form.serialize();
+        col = string.split('&');
+
+
+        
+
+        for(var i = 0; i < col.length; i++){
+          osc = col[i].split("=");
+          del[osc[0]] = osc[1];
+        }
+
+        
+       prot += parseInt(del.protein);
+       carbs += parseInt(del.carbs);
+       fat += parseInt(del.fat);
+
+      }
+
+      
+    }); //end each
+    console.log(prot);
+    console.log(carbs);
+    console.log(fat);
+    pieChart('#calcPie', prot, carbs, fat);
+  });//end click
   
   
 

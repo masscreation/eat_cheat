@@ -1,8 +1,12 @@
 
 <h1>Search for a food item</h1>
  <form id='checkout'>
+        <div id = 'calcPie'></div>
         <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
         <input type="datetime-local" name="time_eaten" id="checkoutDatetime">
+        <div id='calcButton'>
+            Calculate
+        </div>
         <div id='checkoutButton'>
             Create Meal
         </div>
@@ -87,5 +91,7 @@
         </div>
     </form>
 <% end %>
+
+<%= render "items_piecharts" %>
    
 <%= link_to "Back to Dashboard", "/" %> 
