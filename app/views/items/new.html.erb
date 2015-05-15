@@ -18,54 +18,58 @@
  <%= text_field_tag(:q) %>
  <%= submit_tag("Search") %>
 <% end %>
+<button id ='searchAPI'>Search</button>
 
-<% @items.each do |item| %>
-     <form class="searchItem newItem" action="/">
-        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
-        <input type="hidden" name="name" value="<%= item["fields"]["item_name"] %>">
-        <input type="hidden" name="nutritionix_id" value="<%= item["fields"]["item_id"] %>">
-        <input type="hidden" name="calories" value="<%= item["fields"]["nf_calories"] %>">
-        <input type="hidden" name="serving_weight_grams" value="<%= item["fields"]["nf_serving_weight_grams"] %>">
+<div id = 'searchFolder'>
 
-        <% unless item["fields"]["nf_total_fat"].nil?  %>
-        <input type="hidden" name="fat" value="<%= item["fields"]["nf_total_fat"] %>">
-        <% else %>
-        <input type="hidden" name="fat" value="<%= 0 %>">
-        <% end %>
+    <% @items.each do |item| %>
+         <form class="searchItem newItem" action="/">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
+            <input type="hidden" name="name" value="<%= item["fields"]["item_name"] %>">
+            <input type="hidden" name="nutritionix_id" value="<%= item["fields"]["item_id"] %>">
+            <input type="hidden" name="calories" value="<%= item["fields"]["nf_calories"] %>">
+            <input type="hidden" name="serving_weight_grams" value="<%= item["fields"]["nf_serving_weight_grams"] %>">
 
-        <% unless item["fields"]["nf_protein"].nil?  %>
-        <input type="hidden" name="protein" value="<%= item["fields"]["nf_protein"] %>">
-        <% else %>
-        <input type="hidden" name="protein" value="<%= 0 %>">
-        <% end %>
+            <% unless item["fields"]["nf_total_fat"].nil?  %>
+            <input type="hidden" name="fat" value="<%= item["fields"]["nf_total_fat"] %>">
+            <% else %>
+            <input type="hidden" name="fat" value="<%= 0 %>">
+            <% end %>
 
-        <% unless item["fields"]["nf_total_carbohydrate"].nil?  %>
-        <input type="hidden" name="carbs" value="<%= item["fields"]["nf_total_carbohydrate"] %>">
-        <% else %>
-        <input type="hidden" name="carbs" value="<%= 0 %>">
-        <% end %>
-        <input type="checkbox" name="check" class="checker" value="true">
+            <% unless item["fields"]["nf_protein"].nil?  %>
+            <input type="hidden" name="protein" value="<%= item["fields"]["nf_protein"] %>">
+            <% else %>
+            <input type="hidden" name="protein" value="<%= 0 %>">
+            <% end %>
 
-        <div class='searchName'>
-            <h3><%= item["fields"]["item_name"] %><span class="plus"> + </span></h3>
-            <%= item["fields"]["brand_name"] %>
-        </div>
-        <div class="searchResults showMe">
-            <div><strong>Calories</strong><br/>
-                <%= item["fields"]["nf_calories"] %>
+            <% unless item["fields"]["nf_total_carbohydrate"].nil?  %>
+            <input type="hidden" name="carbs" value="<%= item["fields"]["nf_total_carbohydrate"] %>">
+            <% else %>
+            <input type="hidden" name="carbs" value="<%= 0 %>">
+            <% end %>
+            <input type="checkbox" name="check" class="checker" value="true">
+
+            <div class='searchName'>
+                <h3><%= item["fields"]["item_name"] %><span class="plus"> + </span></h3>
+                <%= item["fields"]["brand_name"] %>
             </div>
-            <div><strong>Fat Calories</strong><br/>
-                <%= item["fields"]["nf_total_fat"]  %>
+            <div class="searchResults showMe">
+                <div><strong>Calories</strong><br/>
+                    <%= item["fields"]["nf_calories"] %>
+                </div>
+                <div><strong>Fat Calories</strong><br/>
+                    <%= item["fields"]["nf_total_fat"]  %>
+                </div>
+                <div><strong>Protein Calories</strong><br/>
+                    <%= item["fields"]["nf_protein"] %>
+                </div>
+                <div><strong>Carbs Calories</strong><br/>
+                    <%= item["fields"]["nf_total_carbohydrate"]  %>
+                </div>
             </div>
-            <div><strong>Protein Calories</strong><br/>
-                <%= item["fields"]["nf_protein"] %>
-            </div>
-            <div><strong>Carbs Calories</strong><br/>
-                <%= item["fields"]["nf_total_carbohydrate"]  %>
-            </div>
-        </div>
-    </form>
-<% end %>
+        </form>
+    <% end %>
+</div>
 
 <%= render "items_piecharts" %>
    

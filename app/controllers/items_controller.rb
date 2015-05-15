@@ -2,7 +2,6 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!  
 
   def show
-
   end
 
   def new
@@ -94,6 +93,10 @@ class ItemsController < ApplicationController
   private
   def item_params
     params.require(:item).permit(:nutritionix_id, :calories, :fat, :protein, :carbs, :serving_weight_grams, :name)
+  end
+
+  def api_params
+    params.require(:item).permit(:q)
   end
 
 

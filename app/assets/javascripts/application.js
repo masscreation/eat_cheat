@@ -30,46 +30,77 @@ $(document).ready(function(){
     }
 
     $(this).next().slideToggle('show');
+    }); //end click
+
+  $('#searchAPI').click(function(){
+    // console.log('hey i work!');
+    $val = $('#q').val();
+    console.log($val);
+
+    // run through val to make sure query will be one word
+    beat = $val.split(' ');
+    query = beat[0];
+
+    if (beat.length>1){
+      for (var i = 1; i < beat.length; i++){
+        query += "+"+beat[i];
+      }
+    }
+
+    //create url string
+    var url = "https://api.nutritionix.com/v1_1/search/"+query+"?fields=item_name%2Cbrand_name%2Citem_id%2Cnf_calories%2Cnf_total_fat%2Cnf_protein%2Cnf_total_carbohydrate%2Cnf_serving_weight_grams&appId=58809d9f&appKey=f0ee2e843b2e4a910d564ccebfc2c1dd";
+
+    $.getJSON(url, function(data) {
+      var items = data.hits;
+      var hash = {};
+
+      for(var i = 0; i < items.length; i++){
+        hash.nutrionix_id = items[i].fields.item_id;
+        hash.item_name = items[i].fields.item_name;
+        hash.brand_name = items[i].fields.brand_name;
+        hash.calories = items[i].fields.nf_calories;
+        hash.protein = items[i].fields.nf_protein;
+        hash.fat = items[i].fields.nf_total_fat;
+        hash.carbs = items[i].fields.nf_total_carbohydrate;
+
+        if (hash.fat === null){
+          hash.fat = 0;
+        }
+        if (hash.protein === null){
+          hash.protein = 0;
+        }
+        if (hash.carbs === null){
+          hash.carbs = 0;
+        }
+
+        var $el = '<form class="searchItem newItem" action="/"><input type="hidden" name="authenticity_token" value="b5TXpTNkBKlUUNiGYG6dgWiBPv9aGClzoFgAUPws/3/pJ7XFDtgLKE3b1Xu0IEjS+bLxfE4SVtm1lp+ntNaANA=="><input type="hidden" name="name" value="'+hash.item_name+'"><input type="hidden" name="nutritionix_id" value="'+hash.nutrionix_id+'"><input type="hidden" name="calories" value="'+hash.calories+'"><input type="hidden" name="serving_weight_grams" value="137"><input type="hidden" name="fat" value="'+hash.fat+'"><input type="hidden" name="protein" value="'+hash.protein+'"><input type="hidden" name="carbs" value="'+hash.carbs+'"><input type="checkbox" name="check" class="checker" value="true"><div class="searchName searchNameNew"><h3>'+hash.item_name+'<span class="plus"> + </span></h3>'+hash.brand_name+'</div><div class="searchResults showMe"><div><strong>Calories</strong><br>'+hash.calories+'</div><div><strong>Fat Calories</strong><br>'+hash.fat+'</div><div><strong>Protein Calories</strong><br>'+hash.protein+'</div><div><strong>Carbs Calories</strong><br>'+hash.carbs+'</div></div></form>';
+
+        $('#searchFolder').append($el);
+
+      }
+
+      var search = $('.searchNameNew');
+
+      search.click(function(){
+        var plus = $(this).find('.plus');
+        if (plus.html() == ' + ') {
+          plus.html(' - ');
+        } else {
+          plus.html(' + ');
+        }
+
+        $(this).next().slideToggle('show');
+        }); //end click
+    });
+
+   
+
+
+
+
+
+
   }); //end click
-
-  // $('.searchItem').draggable({
-  //     helper : "clone",
-  //     cursor: "move",
-  //     revert: "invalid",
-  //     stop: function( event, ui ) {
-  //         original = false;
-  //     },
-  //     start: function( event, ui ) {
-  //         original = true;
-  //     }
-  //   });
-
-
-  // $('#checkoutPlate').droppable({
-  //   drop: function( event, ui ) {
-  //       droppable = true;
-  //       if(original){
-  //            var newDiv = $(ui.draggable).clone();
-             
-  //            newDiv.draggable({
-  //               stop: function( event, ui ) {
-  //                   if(!droppable)
-  //                       ui.helper.remove();
-  //               },
-  //               start: function( event, ui ) {
-  //                   droppable = false;
-  //               }
-  //           });
-  //           $(this).append(newDiv);
-  //      }
-  //       else{
-  //          ui.helper.css('top','');
-  //          ui.helper.css('left','');
-  //          $(this).append(ui.helper);
-           
-  //       }
-  //     }
-  // });
 
   //create string with info to send
 
