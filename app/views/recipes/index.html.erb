@@ -10,6 +10,7 @@
 		</div>
 
 		<h4>  <div id="form_adder"><a href='#'> Create a New Recipe</a></div></h4>
+		<h4>  <div id="form_hider"><a href='#'> Hide Form</a></div></h4>
 		<%= form_for [@user, @recipe] do |f| %>
 		    <% if @recipe.errors.any? %>
 		      <div id="error_explanation">
@@ -21,7 +22,7 @@
 		        </ul>
 		      </div>
 		    <% end %>
-
+		
 	    <div class="field">
 		      <%= f.label :name %><br>
 		      <%= f.text_field :name %>

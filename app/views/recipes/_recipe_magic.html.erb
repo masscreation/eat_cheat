@@ -13,7 +13,7 @@ $(document).ready(function(){
 
         // append each recipes
         recipes.forEach(function (recipe) {
-          $recipesCon.append("<div><h3>" + recipe.name + "</h3></div>"
+          $recipesCon.append("<div class=\"recipe\" data-id=" + recipe.id + "><h3>" + recipe.name + "</h3></div>"
             + 
           "<button class=\"edit\">Edit</button></div>" +
           "<button class=\"delete\">Delete</button></div>"); 
@@ -27,13 +27,22 @@ $(document).ready(function(){
       event.preventDefault(); 
       console.log("Form submitted", $(this).serialize());
 
-      var content = $("#recipe_content").val(); 
-      $.post(path, {
-        recipe: {
-          content: content 
-        }
-      }).done(function (createdRecipe) {
-        $recipesCon.append("<div class=\"recipe\" data-id=" + createdRecipe.id + ">" + createdRecipe.name + 
+      var name = $("#recipe_name").val(); 
+      // var ingredient = $("#recipe_ingredient_item_id").val();
+      // var ingredientAmount = $("#recipe_ingredient_quant_of_item_eaten").val(); 
+      $.post(path, 
+            $recipeForm.serialize(), 
+            function(data, textStatus, jqXHR) {
+
+
+              alert(name, "recipe created!");
+
+        // Set the data received from the request to an
+        // element on the page with id="form_errors"
+              $( "#form_errors" ).html( data );
+            }
+             ).done(function (createdRecipe) {
+        $recipesCon.append("<div class=\"recipe\">" + createdRecipe.name + 
           "<button class=\"edit\">Edit</button></div>" +
           "<button class=\"delete\">Delete</button></div>");
       }); 
@@ -58,7 +67,7 @@ $(document).ready(function(){
       })
      }); 
 
-     $recipesCon.on("click", ".completed", function () {
+     $recipesCon.on("click", ".edit", function () {
       var $recipe = $(this).closest(".recipe"); 
 
       $.ajax({
@@ -77,19 +86,17 @@ $(document).ready(function(){
      //hide the recipe form
       $recipeForm.hide();
 
-      $('.form_hider').click(function (event) {
+      $('#form_hider').click(function (event) {
       event.preventDefault();
       console.log('click');
-      $recipeForm.hide(); 
-      $('#form_hider').html("<div id=\"form_adder\"><a href=\"#\">Create a New Recipe</a></div>");  
+      $recipeForm.hide()
       
      }); 
 
       //unhide the recipe form
      $('#form_adder').click(function (event) {
       event.preventDefault();
-      console.log('click');
-      $('#form_adder').html("<div id=\"form_hider\"><a href=\"#\">Hide Form</a></div>");  
+      console.log('click');  
       $recipeForm.show(); 
      }); 
 
@@ -101,8 +108,9 @@ $(document).ready(function(){
         event.preventDefault();
         $(".ingredient_fields").append("<div class=\"ingredient_field\">" + $ingredientField.html() + "</div>")
         clicker();
-      });
-
+      });// ^
+  //        |
+  // Event listener function that... keeps listening?(thanks Mike!)
      var clicker = function() {
       $(".field_remover").click(function( event ) {
         event.preventDefault();
