@@ -1,7 +1,8 @@
 <script>
   var handle = 0;
 
-  $('#searchAPI').click(function(){
+  $('#searchAPI').click(function(event){
+    event.preventDefault();
     var $check = $('form > .checker');
 
     $('#message').html('');

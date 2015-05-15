@@ -19,12 +19,11 @@
         </form>
     </div>
 
+<form id = 'nis'> 
+    <input id='q' type="text" placeholder="Search for Items">
+    <button id='searchAPI'>Search</button>
+</form>
 
-<%= form_tag({:controller => "items", :action => "new"}, :method => "get", :id => "nis") do -%>
- <%= label_tag(:q, "Search for:") %>
- <%= text_field_tag(:q) %>
-<% end %>
-<button id='searchAPI'>Search</button>
 
 <div id = 'searchFolder'>
 
