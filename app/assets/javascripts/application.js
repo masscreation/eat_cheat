@@ -22,119 +22,67 @@ $(document).ready(function(){
   var search = $('.searchName');
 
   search.click(function(){
+    var plus = $(this).find('.plus');
+    if (plus.html() == ' + ') {
+      plus.html(' - ');
+    } else {
+      plus.html(' + ');
+    }
+
     $(this).next().slideToggle('show');
-  }); //end click
-
-  $('.searchItem').draggable({
-      helper : "clone",
-      cursor: "move",
-      revert: "invalid",
-      stop: function( event, ui ) {
-          original = false;
-      },
-      start: function( event, ui ) {
-          original = true;
-      }
-    });
+    }); //end click
 
 
-  $('#checkoutPlate').droppable({
-    drop: function( event, ui ) {
-        droppable = true;
-        if(original){
-             var newDiv = $(ui.draggable).clone();
-             
-             newDiv.draggable({
-                stop: function( event, ui ) {
-                    if(!droppable)
-                        ui.helper.remove();
-                },
-                start: function( event, ui ) {
-                    droppable = false;
-                }
-            });
-            $(this).append(newDiv);
-       }
-        else{
-           ui.helper.css('top','');
-           ui.helper.css('left','');
-           $(this).append(ui.helper);
-           
+  $('#calcButton').click(function(){
+    $('#calcPie').html("");
+
+    var prot = 0,
+        carbs = 0,
+        fat = 0;
+
+    var $check = $('form > .checker');
+
+
+   
+
+    $check.each(function(index){
+      var osc = [];
+      var del = {};
+      if ($(this).is(':checked')){
+        var $form = $(this).closest('form');
+
+        string = $form.serialize();
+        col = string.split('&');
+
+
+        
+
+        for(var i = 0; i < col.length; i++){
+          osc = col[i].split("=");
+          del[osc[0]] = osc[1];
         }
+
+        
+       prot += parseInt(del.protein);
+       carbs += parseInt(del.carbs);
+       fat += parseInt(del.fat);
+
       }
-    });
 
-  // grab the 'recipes-con'
-  var $recipesCon = $("#recipes-con"); 
-
-     console.log($recipesCon.html()); 
-
-    $.get("/users/<%= current_user.id %>/recipes")
-      .done(function (recipes) {
-        console.log("All Recipes:", recipes);
-
-        // append each recipe
-        recipes.forEach(function (recipe) {
-          $recipesCon.append("<div>" + recipe.name + "</div>"); 
-        });
-
-      });
-      // grab the form
-     var $recipeForm = $("#new_recipe"); 
-
-     $recipeForm.on("submit", function (event) {
-      event.preventDefault(); 
-      console.log("Form submitted", $(this).serialize());
-
-      var content = $("#recipe_content").val(); 
-      $.post("/users/:id/recipes", {
-        recipe: {
-          content: content 
-        }
-      }).done(function (createdRecipe) {
-        $recipesCon.append("<div class=\"recipe\" data-id=" + createdRecipe.id + ">" + createdRecipe.content + 
-          "<input type=\"checkbox\" class=\"completed\">" + 
-          "<button class=\"delete\">Delete</button></div>");
-      }); 
-     }); 
-  //  setup a click handler that only
-    //  handle clicks from an element
-    //  with the `.delete` className
-    //  that is inside the $recipesCon
-     $recipesCon.on("click", ".delete", function (event) {
-      alert("I wask clicked!"); 
       
-      // grab the entire recipe
-      var $recipe = $(this).closest(".recipe"); 
+    }); //end each
+    console.log(prot);
+    console.log(carbs);
+    console.log(fat);
+    pieChart('#calcPie', prot, carbs, fat);
+  });//end click
+  
+  
 
-      //send our delete request
-      $.ajax({
-        url: "/users/:id/recipes/" + $recipe.data("id") + ".json",
-        type: "DELETE"
-      }).done(function(){
-        //once we completed the delete
-        $recipe.remove(); 
-      })
-     }); 
-
-     $recipesCon.on("click", ".completed", function () {
-      var $recipe = $(this).closest(".recipe"); 
-
-      $.ajax({
-        url: "/users/:id/recipes" + $recipe.data("id") + ".json", 
-        type: "PATCH",
-        data: {
-          recipe: {
-            completed: this.checked
-          }
-        } 
-      }).done(function (data) {
-        // update the styling of our recipe
-        $recipe.toggleClass("recipe-completed")
-      }) 
-     }); 
+  
 
     
+
 }); //end ready
 
 

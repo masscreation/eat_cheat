@@ -4,15 +4,19 @@ $(document).ready(function(){
   // grab the 'recipes-con'
   var $recipesCon = $("#recipes-con"); 
 
-     console.log($recipesCon.html()); 
+     var user = location.pathname.split('/')[2]; 
+      var path = location.pathname + '.json';
 
-    $.get("/users/<%= current_user.id %>/recipes")
+    $.get(path)
       .done(function (recipes) {
         console.log("All Recipes:", recipes);
 
-        // append each recipe
+        // append each recipes
         recipes.forEach(function (recipe) {
-          $recipesCon.append("<div>" + recipe.name + "</div>"); 
+          $recipesCon.append("<div class=\"recipe\" data-id=" + recipe.id + "><h3>" + recipe.name + "</h3></div>"
+            + 
+          "<button class=\"edit\">Edit</button></div>" +
+          "<button class=\"delete\">Delete</button></div>"); 
         });
 
       });
@@ -23,14 +27,23 @@ $(document).ready(function(){
       event.preventDefault(); 
       console.log("Form submitted", $(this).serialize());
 
-      var content = $("#recipe_content").val(); 
-      $.post("/users/:id/recipes", {
-        recipe: {
-          content: content 
-        }
-      }).done(function (createdRecipe) {
-        $recipesCon.append("<div class=\"recipe\" data-id=" + createdRecipe.id + ">" + createdRecipe.content + 
-          "<input type=\"checkbox\" class=\"completed\">" + 
+      var name = $("#recipe_name").val(); 
+      // var ingredient = $("#recipe_ingredient_item_id").val();
+      // var ingredientAmount = $("#recipe_ingredient_quant_of_item_eaten").val(); 
+      $.post(path, 
+            $recipeForm.serialize(), 
+            function(data, textStatus, jqXHR) {
+
+
+              alert(name, "recipe created!");
+
+        // Set the data received from the request to an
+        // element on the page with id="form_errors"
+              $( "#form_errors" ).html( data );
+            }
+             ).done(function (createdRecipe) {
+        $recipesCon.append("<div class=\"recipe\">" + createdRecipe.name + 
+          "<button class=\"edit\">Edit</button></div>" +
           "<button class=\"delete\">Delete</button></div>");
       }); 
      }); 
@@ -46,7 +59,7 @@ $(document).ready(function(){
 
       //send our delete request
       $.ajax({
-        url: "/users/:id/recipes/" + $recipe.data("id") + ".json",
+        url: "/users/" + user + "/recipes/" + $recipe.data("id") + ".json",
         type: "DELETE"
       }).done(function(){
         //once we completed the delete
@@ -54,25 +67,38 @@ $(document).ready(function(){
       })
      }); 
 
-     $recipesCon.on("click", ".completed", function () {
+     $recipesCon.on("click", ".edit", function () {
       var $recipe = $(this).closest(".recipe"); 
 
       $.ajax({
-        url: "/users/:id/recipes" + $recipe.data("id") + ".json", 
+        url: "/users/" + user + "/recipes" + $recipe.data("id") + ".json", 
         type: "PATCH",
         data: {
           recipe: {
             completed: this.checked
           }
         } 
-      }).done(function (data) {
-        // update the styling of our recipe
-        $recipe.toggleClass("recipe-completed")
-      }) 
+      });
      }); 
 
-     // hide hidden fields
-     $('#hidden_field').hide(); 
+     //ADD FORM AJAX and JQUERY FUNCTIONALITY
+
+     //hide the recipe form
+      $recipeForm.hide();
+
+      $('#form_hider').click(function (event) {
+      event.preventDefault();
+      console.log('click');
+      $recipeForm.hide()
+      
+     }); 
+
+      //unhide the recipe form
+     $('#form_adder').click(function (event) {
+      event.preventDefault();
+      console.log('click');  
+      $recipeForm.show(); 
+     }); 
 
      // grab ingredient field
      var $ingredientField = $('.ingredient_field')
@@ -80,8 +106,19 @@ $(document).ready(function(){
      // add ingredent field to Recipe form
      $("#field_adder").click(function( event ) {
         event.preventDefault();
-        $(".ingredient_fields").append($ingredientField.html()); 
+        $(".ingredient_fields").append("<div class=\"ingredient_field\">" + $ingredientField.html() + "</div>")
+        clicker();
+      });// ^
+  //        |
+  // Event listener function that... keeps listening?(thanks Mike!)
+     var clicker = function() {
+      $(".field_remover").click(function( event ) {
+        event.preventDefault();
+        console.log('click'); 
+        this.closest(".ingredient_field").remove()
+        // $($ingredientField).remove(); 
       });
+    };
 
 }); //end ready
 </script>

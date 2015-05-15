@@ -18,6 +18,11 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new
     @item_options = Item.all.map { |item| [item.name, item.id] }
     @ingredient = Ingredient.new
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @recipes }
+    end
   end
 
   def new

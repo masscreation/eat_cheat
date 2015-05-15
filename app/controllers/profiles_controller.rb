@@ -71,14 +71,14 @@ current_user.recipes.each do |recipe|
 
         # EVENING:
         if (meal.time_eaten.hour.between?(17.51,23.99))
-        @cal_per_recipe += item.calories.round(1)
-        @carb_per_recipe += item.carbs.round(1)
-        @prot_per_recipe += item.protein.round(1)
-        @fat_per_recipe += item.fat.round(1)
+          @cal_per_recipe += item.calories.round(1)
+          @carb_per_recipe += item.carbs.round(1)
+          @prot_per_recipe += item.protein.round(1)
+          @fat_per_recipe += item.fat.round(1)
 
-        #create array with all recipes eaten for evening
-        @food_evening << { 'name': meal.recipe.name, 'calories': @cal_per_recipe, 'carbs': @carb_per_recipe, 
-        'protein': @prot_per_recipe, 'fat': @fat_per_recipe}
+          #create array with all recipes eaten for evening
+          @food_evening << { 'name': meal.recipe.name, 'calories': @cal_per_recipe, 'carbs': @carb_per_recipe, 
+          'protein': @prot_per_recipe, 'fat': @fat_per_recipe}
         end
 
       end #if filter today
@@ -90,7 +90,16 @@ current_user.recipes.each do |recipe|
         end
     end #3-do
   end #2-do
-end #1-do     
+  @profile_array = []
+
+  current_user.profiles.each do |data| 
+      @profile_array << {'name': data.name, 'age': data.age, 'gender': data.gender, 'height': data.height, 'weight': data.weight, 'activity_level': data.activity_level}
+  end
+
+
+
+
+end #Index    
 
 
 #create array for today's item data
@@ -117,6 +126,19 @@ end #1-do
     end
 end
 
+    
+    @all =current_user.profiles
+    @data = @all.last
+
+
+    if (@data.gender.to_i == 2)
+        @cal_need = ((655 + (4.3 * @data.weight.to_i) + (4.7 * @data.height.to_i) - (4.7 * @data.age.to_i)) * @data.activity_level.to_i)
+      elsif (@data.gender == 1)
+        @cal_need = ((66 +(6.3 * @data.weight.to_i) + (12.9 * @data.height.to_i) - (6.8 * @data.age.to_i))  * @data.activity_level.to_i)
+      else  @cal_need ="Can't be calculated."
+
+    end
+
 
 
 #authorize
@@ -129,7 +151,6 @@ end
   def edit
     @user = current_user
     @profile = Profile.new
-      
   end
 
   def new
@@ -140,8 +161,9 @@ end
   def create
     @profile = current_user.profiles.new(profile_params)
     @user = current_user
+    
     if @profile.save
-    redirect_to :root
+      redirect_to :root
     end
   end
 

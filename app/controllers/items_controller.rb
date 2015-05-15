@@ -2,12 +2,10 @@ class ItemsController < ApplicationController
   before_filter :authenticate_user! 
 
   def show
-
   end
 
   def new
     @item = Item.new
-    @database_items = []
     #gets response
     query = params[:q]
 
@@ -31,13 +29,11 @@ class ItemsController < ApplicationController
           index += 1
         end
       end
-
-
-    @database_items = Item.where('name LIKE ?', "%#{search}%")
     end
     
 
     parse = "fields=item_name%2Cbrand_name%2Citem_id%2Cnf_calories%2Cnf_total_fat%2Cnf_protein%2Cnf_total_carbohydrate%2Cnf_serving_weight_grams&appId=58809d9f&appKey=f0ee2e843b2e4a910d564ccebfc2c1dd" 
+
     if search 
         resp = Typhoeus.get("https://api.nutritionix.com/v1_1/search/#{search}", params: parse)
         @items = JSON.parse(resp.body)['hits']
@@ -47,24 +43,33 @@ class ItemsController < ApplicationController
         @items = []
     end
 
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render :json => @items }
+    end
+
+
   end
 
   def create
     @item = Item.new(item_params)
-
-    puts "\n\n\n\n\n\n\n\n\n\n\n BEFORE CHANGE: #{@item.fat}"
 
     @item.fat *= 9
     @item.protein *= 4
     @item.carbs *= 4
 
 
-    puts "\n\n\n AFTER CHANGE: #{@item.fat}"
-
-
     if @item.save 
       current_user.items << @item
-      redirect_to items_path
+    end
+
+    respond_to do |format|
+      format.html
+      format.json {
+        if @item.save 
+          current_user.items << @item
+        end
+      }
     end
   end
 
@@ -84,4 +89,7 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:nutritionix_id, :calories, :fat, :protein, :carbs, :serving_weight_grams, :name)
   end
+
+
+
 end
