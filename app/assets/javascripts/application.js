@@ -32,7 +32,22 @@ $(document).ready(function(){
     $(this).next().slideToggle('show');
     }); //end click
 
+
+
   $('#searchAPI').click(function(){
+    var $check = $('form > .checker');
+
+    $check.each(function(index){
+      var osc = [];
+      var del = {};
+      if (!$(this).is(':checked')){
+        var $form = $(this).closest('form');
+        $form.remove();
+      }
+    });
+
+
+
     // console.log('hey i work!');
     $val = $('#q').val();
     console.log($val);
@@ -101,30 +116,6 @@ $(document).ready(function(){
 
 
   }); //end click
-
-  //create string with info to send
-
-  //search button
-  //   var url = "http://www.omdbapi.com/?s=Wedding";
-
-  // $.getJSON(url, function(data) {
-  //     var list = "<ul>";
-  //     // Iterate through the data object returned
-  //     data.Search.forEach( function(item) {
-  //         // Add the title of result to the list
-  //         list += "<li>" + item.Title + "</li>";
-  //     })
-  //     // Close the unordered list
-  //     list += "</ul>";
-
-  //     // Now we just add the newly created list to the results div
-  //     $("#search_results").html(list);
-  // });
-
-
-
-
-
 
 
   $('#calcButton').click(function(){
