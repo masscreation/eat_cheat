@@ -1,0 +1,102 @@
+<script>
+var calGraph = function(place, calories, dailyCal) {
+  var w = 260;
+  var h = 20;
+  var per = (calories/dailyCal) * w
+  var calPer = Math.round((calories/dailyCal) * 100);
+  calPer += "%";
+
+  console.log('this is per' + per);
+
+  var dataset = [calories]
+
+  var svg = d3.select(place)
+    .append('svg')
+    .attr('width', w)
+    .attr('height', h);
+
+  svg.selectAll('rect')
+    .data(dataset)
+    .enter()
+    .append('rect')
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('width', per)
+    .attr('height', h)
+    .attr('fill', function(d){
+      return 'rgb('+ (155 - (calories)) + ', 82, 182'+ (155 - (calories)) + ')';
+    });
+
+  svg.selectAll('text')
+    .data(dataset)
+    .enter()
+    .append("text")
+    .text(function(d) {
+        return calPer;
+    })
+    .attr("x", function(d, i) {
+        return i * (w / dataset.length) + 5;  // +5
+   })
+   .attr("y", function(d) {
+        return h - 6;              // +15
+   }).attr("font-family", "sans-serif")
+   .attr("font-size", "11px")
+   .attr("fill", "white");
+
+ 
+}   
+
+$('#calcButton').click(function(){
+    $('#calcPie').html("");
+    $('#calcBar').html("");
+    $('#checkout').slideDown('show');
+    $('#createItem').slideDown('show');
+    $('#calcNeed').html('Calories compared to your daily need:')
+
+    var prot = 0,
+        carbs = 0,
+        fat = 0,
+        cal = 0;
+
+    var $check = $('form > .checker');
+
+
+   
+
+    $check.each(function(index){
+      var osc = [];
+      var del = {};
+      if ($(this).is(':checked')){
+        var $form = $(this).closest('form');
+
+        string = $form.serialize();
+        col = string.split('&');
+
+
+        
+
+        for(var i = 0; i < col.length; i++){
+          osc = col[i].split("=");
+          del[osc[0]] = osc[1];
+        }
+
+        
+       prot += parseInt(del.protein);
+       carbs += parseInt(del.carbs);
+       fat += parseInt(del.fat);
+       cal += parseInt(del.calories);
+
+      }
+
+      
+    }); //end each
+    console.log(prot);
+    console.log(carbs);
+    console.log(fat);
+    pieChart('#calcPie', prot, carbs, fat);
+    calGraph('#calcBar', cal, <%= @cal_need %>);
+
+    console.log('this is the cal need, <%= @cal_need %>')
+  });//end click   
+
+</script>

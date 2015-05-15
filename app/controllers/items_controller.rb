@@ -5,6 +5,20 @@ class ItemsController < ApplicationController
   end
 
   def new
+
+    @all =current_user.profiles
+    @data = @all.last
+
+
+    if (@data.gender.to_i == 2)
+        @cal_need = ((655 + (4.3 * @data.weight.to_i) + (4.7 * @data.height.to_i) - (4.7 * @data.age.to_i)) * @data.activity_level.to_i)
+      elsif (@data.gender == 1)
+        @cal_need = ((66 +(6.3 * @data.weight.to_i) + (12.9 * @data.height.to_i) - (6.8 * @data.age.to_i))  * @data.activity_level.to_i)
+      else  @cal_need = 2200
+
+    end
+
+
     @item = Item.new
     #gets response
     query = params[:q]

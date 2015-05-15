@@ -3,6 +3,8 @@
 <h1>Search for a food item</h1>
     <div id = 'sidebar'>
         <div id = 'calcPie'></div>
+        <div id="calcNeed"></div>
+        <div id = 'calcBar'></div>
         <div id='calcButton'>
             Calculate
         </div>
@@ -76,6 +78,7 @@
     <% end %>
 </div>
 
+<%= render "items_progressbar" %>
 <%= render "items_piecharts" %>
 <%= render "items_ajax" %>
    
