@@ -4,7 +4,7 @@ $(document).ready(function(){
   // grab the 'recipes-con'
   var $recipesCon = $("#recipes-con"); 
 
-     var user = location.pathname.split('/')[2]; 
+      var user = location.pathname.split('/')[2]; 
       var path = location.pathname + '.json';
 
     $.get(path)
@@ -13,9 +13,9 @@ $(document).ready(function(){
 
         // append each recipes
         recipes.forEach(function (recipe) {
-          $recipesCon.append("<div class=\"recipe\" data-id=" + recipe.id + "><h3>" + recipe.name + "</h3></div>"
+          $recipesCon.append("<div class=\"recipe\" data-id=" + recipe.id + "><h3>" + recipe.name + "</h3>"
             + 
-          "<button class=\"edit\">Edit</button></div>" +
+          "<button class=\"edit\">Edit</button>" +
           "<button class=\"delete\">Delete</button></div>"); 
         });
 
@@ -43,7 +43,7 @@ $(document).ready(function(){
             }
              ).done(function (createdRecipe) {
         $recipesCon.append("<div class=\"recipe\">" + createdRecipe.name + 
-          "<button class=\"edit\">Edit</button></div>" +
+          "<div><button class=\"edit\">Edit</button></div>" +
           "<button class=\"delete\">Delete</button></div>");
       }); 
      }); 
@@ -53,13 +53,18 @@ $(document).ready(function(){
     //  that is inside the $recipesCon
      $recipesCon.on("click", ".delete", function (event) {
       alert("I wask clicked!"); 
+
+      var $this = this; 
       
       // grab the entire recipe
-      var $recipe = $(this).closest(".recipe"); 
+      var $recipe = $this.closest('.recipe'); 
+
+      console.log($recipe); 
+      console.log($this); 
 
       //send our delete request
       $.ajax({
-        url: "/users/" + user + "/recipes/" + $recipe.data("id") + ".json",
+        url: "/users/" + user + "/recipes/" + parseInt($recipe.dataset.id) + ".json",
         type: "DELETE"
       }).done(function(){
         //once we completed the delete
@@ -68,10 +73,11 @@ $(document).ready(function(){
      }); 
 
      $recipesCon.on("click", ".edit", function () {
+      preventDefault(); 
       var $recipe = $(this).closest(".recipe"); 
 
       $.ajax({
-        url: "/users/" + user + "/recipes" + $recipe.data("id") + ".json", 
+        url: "/users/" + user + "/recipes/" + $recipe.data("id") + ".json", 
         type: "PATCH",
         data: {
           recipe: {
