@@ -1,3 +1,4 @@
+<div id="message"></div>
 
 <h1>Search for a food item</h1>
     <div id = 'sidebar'>
@@ -6,12 +7,15 @@
             Calculate
         </div>
         <form id='checkout' class='showMe'>
-            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
+            <div id='createItem'>
+                Create
+            </div>
+          <!--   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
             <p>Enter the time you ate these items:</p>
             <input type="datetime-local" name="time_eaten" id="checkoutDatetime">
             <div id='checkoutButton'>
                 Create Meal
-            </div>
+            </div> -->
         </form>
     </div>
 
