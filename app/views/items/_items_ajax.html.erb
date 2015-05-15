@@ -1,4 +1,6 @@
 <script>
+  var handle = 0;
+
   $('#searchAPI').click(function(){
     var $check = $('form > .checker');
 
@@ -51,13 +53,13 @@
           hash.carbs = 0;
         }
 
-        var $el = '<form class="searchItem newItem" action="/"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"><input type="hidden" name="name" value="'+hash.item_name+'"><input type="hidden" name="nutritionix_id" value="'+hash.nutrionix_id+'"><input type="hidden" name="calories" value="'+hash.calories+'"><input type="hidden" name="serving_weight_grams" value="137"><input type="hidden" name="fat" value="'+hash.fat+'"><input type="hidden" name="protein" value="'+hash.protein+'"><input type="hidden" name="carbs" value="'+hash.carbs+'"><input type="checkbox" name="check" class="checker" value="true"><div class="searchName searchNameNew"><h3>'+hash.item_name+'<span class="plus"> + </span></h3>'+hash.brand_name+'</div><div class="searchResults showMe"><div><strong>Calories</strong><br>'+hash.calories+'</div><div><strong>Fat Calories</strong><br>'+hash.fat+'</div><div><strong>Protein Calories</strong><br>'+hash.protein+'</div><div><strong>Carbs Calories</strong><br>'+hash.carbs+'</div></div></form>';
+        var $el = '<form class="searchItem newItem" action="/"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"><input type="hidden" name="name" value="'+hash.item_name+'"><input type="hidden" name="nutritionix_id" value="'+hash.nutrionix_id+'"><input type="hidden" name="calories" value="'+hash.calories+'"><input type="hidden" name="serving_weight_grams" value="137"><input type="hidden" name="fat" value="'+hash.fat+'"><input type="hidden" name="protein" value="'+hash.protein+'"><input type="hidden" name="carbs" value="'+hash.carbs+'"><input type="checkbox" name="check" class="checker" value="true"><div class="searchName searchNameNew'+handle+'"><h3>'+hash.item_name+'<span class="plus"> + </span></h3>'+hash.brand_name+'</div><div class="searchResults showMe"><div><strong>Calories</strong><br>'+hash.calories+'</div><div><strong>Fat Calories</strong><br>'+hash.fat+'</div><div><strong>Protein Calories</strong><br>'+hash.protein+'</div><div><strong>Carbs Calories</strong><br>'+hash.carbs+'</div></div></form>';
 
         $('#searchFolder').append($el);
 
       }
 
-      var search = $('.searchNameNew');
+      var search = $('.searchNameNew'+handle);
 
       search.click(function(){
         var plus = $(this).find('.plus');
@@ -69,6 +71,7 @@
 
         $(this).next().slideToggle('show');
         }); //end click
+      handle++;
     });
 
    
