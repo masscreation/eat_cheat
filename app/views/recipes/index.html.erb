@@ -5,10 +5,11 @@
 		
 		<!-- Display recipe data -->
 		<div id="recipes-con">
+			<h1> Your Recipes </h1>
     		
 		</div>
 
-		<h3> Create a New Recipe </h3>
+		<h4> <a href="#" id="form_adder">Create a New Recipe</a> </h4>
 		<%= form_for [@user, @recipe] do |f| %>
 		    <% if @recipe.errors.any? %>
 		      <div id="error_explanation">

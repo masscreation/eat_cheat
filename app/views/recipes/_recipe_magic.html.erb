@@ -13,7 +13,10 @@ $(document).ready(function(){
 
         // append each recipes
         recipes.forEach(function (recipe) {
-          $recipesCon.append("<div>" + recipe.name + "</div>"); 
+          $recipesCon.append("<div><h3>" + recipe.name + "</h3></div>"
+            + 
+          "<button class=\"edit\">Edit</button></div>" +
+          "<button class=\"delete\">Delete</button></div>"); 
         });
 
       });
@@ -25,13 +28,13 @@ $(document).ready(function(){
       console.log("Form submitted", $(this).serialize());
 
       var content = $("#recipe_content").val(); 
-      $.post("/users/:id/recipes", {
+      $.post(path, {
         recipe: {
           content: content 
         }
       }).done(function (createdRecipe) {
-        $recipesCon.append("<div class=\"recipe\" data-id=" + createdRecipe.id + ">" + createdRecipe.content + 
-          "<input type=\"checkbox\" class=\"completed\">" + 
+        $recipesCon.append("<div class=\"recipe\" data-id=" + createdRecipe.id + ">" + createdRecipe.name + 
+          "<button class=\"edit\">Edit</button></div>" +
           "<button class=\"delete\">Delete</button></div>");
       }); 
      }); 
@@ -47,7 +50,7 @@ $(document).ready(function(){
 
       //send our delete request
       $.ajax({
-        url: "/users/:id/recipes/" + $recipe.data("id") + ".json",
+        url: "/users/" + user + "/recipes/" + $recipe.data("id") + ".json",
         type: "DELETE"
       }).done(function(){
         //once we completed the delete
@@ -59,21 +62,35 @@ $(document).ready(function(){
       var $recipe = $(this).closest(".recipe"); 
 
       $.ajax({
-        url: "/users/:id/recipes" + $recipe.data("id") + ".json", 
+        url: "/users/" + user + "/recipes" + $recipe.data("id") + ".json", 
         type: "PATCH",
         data: {
           recipe: {
             completed: this.checked
           }
         } 
-      }).done(function (data) {
-        // update the styling of our recipe
-        $recipe.toggleClass("recipe-completed")
-      }) 
+      });
      }); 
 
-     // hide hidden fields
-     $('#hidden_field').hide(); 
+     //ADD FORM AJAX and JQUERY FUNCTIONALITY
+
+     //hide the recipe form
+      $recipeForm.hide();
+
+      $('#form_adder').click(function (event) {
+      event.preventDefault();
+      console.log('click');
+      $('#form_hider').html("<div id=\"form_hider\">Hide Form</div>");  
+      $recipeForm.hide(); 
+     }); 
+
+      //unhide the recipe form
+     $('#form_adder').click(function (event) {
+      event.preventDefault();
+      console.log('click');
+      $('#form_adder').html("<div id=\"form_hider\">Hide Form</div>");  
+      $recipeForm.show(); 
+     }); 
 
      // grab ingredient field
      var $ingredientField = $('.ingredient_field')
