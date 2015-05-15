@@ -1,16 +1,19 @@
 
 <h1>Search for a food item</h1>
- <form id='checkout'>
+    <div id = 'sidebar'>
         <div id = 'calcPie'></div>
-        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
-        <input type="datetime-local" name="time_eaten" id="checkoutDatetime">
         <div id='calcButton'>
             Calculate
         </div>
-        <div id='checkoutButton'>
-            Create Meal
-        </div>
- </form>
+        <form id='checkout' class='showMe'>
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
+            <p>Enter the time you ate these items:</p>
+            <input type="datetime-local" name="time_eaten" id="checkoutDatetime">
+            <div id='checkoutButton'>
+                Create Meal
+            </div>
+        </form>
+    </div>
 
 
 <%= form_tag({:controller => "items", :action => "new"}, :method => "get", :id => "nis") do -%>
