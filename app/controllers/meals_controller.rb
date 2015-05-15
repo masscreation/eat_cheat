@@ -1,5 +1,5 @@
 class MealsController < ApplicationController
-
+	before_filter :authenticate_user!
 	def create
 		@meal = Meal.new(meal_params)
 
