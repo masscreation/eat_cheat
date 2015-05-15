@@ -1,0 +1,75 @@
+
+
+    <h1>Edit Profile</h1>
+  	<hr>
+
+      
+      <!-- edit form column -->
+
+    <div class="col-md-9 personal-info">
+        <h3>Personal info</h3>
+      <%= form_for [@user, @profile], :html => {:class => "form-horizontal center"} do |f| %>
+  <div class="form-group">
+		    <% if @profile.errors.any? %>
+		      <div id="error_explanation">
+		        <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+		        <ul>
+		        <% @profile.errors.full_messages.each do |message| %>
+		          <li><%= message %></li>
+		        <% end %>
+		        </ul>
+		      </div>
+		    <% end %>
+		    <div class="field"> 
+	           <%= f.label :name, :class => "col-md-4" %>
+	            
+	            <%= f.text_field :name, :placeholder => "your name", :class => "col-xs-3-col-sm-4-col-md-5 form-control"  %>
+	        </div><br />
+         
+          <div class="field"> 
+             <%= f.label :age, :class => "col-md-4" %>
+              
+              <%= f.text_field :age, :placeholder => "your age", :class => "col-xs-3-col-sm-4-col-md-5 form-control"  %>
+          </div><br />
+          	
+          <div class="field"> 
+             <%= f.label :height, :class => "col-md-4" %>
+              
+              <%= f.text_field :height, :placeholder => "height in cm", :class => "col-xs-3-col-sm-4-col-md-5 form-control"  %>
+          </div><br />
+
+          <div class="field"> 
+             <%= f.label :weight, :class => "col-md-4" %>
+              
+              <%= f.text_field :weight, :placeholder => "weight in pounds", :class => "col-xs-3-col-sm-4-col-md-5 form-control" %>
+          </div><br />          
+          
+          	<div class="field">
+            	<%= f.label :gender, :class => "col-md-4"%>
+              	
+              	<%=f.select :gender, options_for_select(
+                [['Cisgender Male', 1], ['Cisgender Female', 2], ['Gay', 1], ['Lesbian', 2], ['Bisexual Male', 1],['Bisexual Female', 2],['I am not sure, let me get back to you on that.', 0]]), :class => "col-xs-3-col-sm-4-col-md-5 form-control"%>                     
+            </div><br />
+          
+          	 <div class="field">
+            	<%= f.label :activity_level, :class => "col-md-4" %>
+
+                <%=f.select :activity_level, options_for_select(
+                [['Sedentary', 20], ['Low Active', 30], ['Active', 40], ['Very Active', 50], ['Athlete', 60]]), :class => "col-xs-3-col-sm-4-col-md-5 form-control"%>
+             </div><br />
+            
+
+            <div class="col-md-8">
+           <div class="actions">
+              <%= f.submit "Create my Profile", :class => "btn btn-primary" %>
+            
+              <input type="reset" class="btn btn-default" value="Cancel">
+                 <div class="actions"></div>
+      <% end %>
+    </div>
+  </div>
+			  
+
+</div>
+<hr>

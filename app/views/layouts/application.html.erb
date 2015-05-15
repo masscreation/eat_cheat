@@ -5,11 +5,53 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <!-- NAVBAR -->
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Project name</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to 'Dashboard', root_path(@user) %></li>
+          <li><%= link_to 'My Profile', new_user_profile_path(@user[:id]) %></li>
+         
+          <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %> </li>
+          <li><%= link_to "Create a New Recipe", new_user_recipe_path(@user) %></li>
+          <li><%= link_to "Create a New Item", new_item_path %></li>
+          <li><%= link_to "Show all recipies", user_recipes_path(@user) %></li>
+        </ul>
+      </div>
+    </div>
+  </nav><br />
 </head>
 <body>
 	  <div class="row">
-	    <div class="col-md-3"></div>
-	    <div class="col-md-6">
+	    <div class="col-md-7 col-md-offset-2"></div>
+	    <div class="col-md-7 col-md-offset-2">
+		<% if user_signed_in? %> 
+		Signed in as <%= current_user.email %>. Not you? 
+		<% if user_signed_in? %>
+		<%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+		<% else %>
+		<li>
+		<%= link_to('Login', new_user_session_path)  %>  
+		</li>
+		<% end %>
+		<% end %>
+		<% flash.each do |name, msg| %>
+		<%=content_tag :div, msg, :id => "flash_#{name}" %>
+		<% end %>
+
 	      <%= yield %>
 	    </div>
 	    <div class="col-md-3"></div>
