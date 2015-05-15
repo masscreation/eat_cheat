@@ -60,12 +60,13 @@ class ItemsController < ApplicationController
     @item.carbs *= 4
 
     # check that item name is displayed correctly
-    name = @item.name.split('+');
+    name = @item.name.split('+').join(' ')
+    name2 = name.split('%2C').join(', ')
 
     if (name.length == 1)
-      @item.name = name
+      @item.name = name2[0]
     else
-      @item.name = name.join(' ');
+      @item.name = name2
     end
 
     puts "\n\n\n\n\n\n\n\n\n\n\n\n\n #{@item.name}"
