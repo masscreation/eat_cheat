@@ -13,6 +13,11 @@
 .searchName {
   display: inline-block;
 }
+
+.searchName:hover {
+  opacity: .7;  
+}
+
 .searchItem {
   display: block;
 }

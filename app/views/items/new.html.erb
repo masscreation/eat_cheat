@@ -45,8 +45,9 @@
         <input type="hidden" name="carbs" value="<%= 0 %>">
         <% end %>
         <input type="checkbox" name="check" class="checker" value="true">
+
         <div class='searchName'>
-            <h3><%= item["fields"]["item_name"] %></h3>
+            <h3><%= item["fields"]["item_name"] %><span class="plus"> + </span></h3>
             <%= item["fields"]["brand_name"] %>
         </div>
         <div class="searchResults showMe">

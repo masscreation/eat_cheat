@@ -22,6 +22,13 @@ $(document).ready(function(){
   var search = $('.searchName');
 
   search.click(function(){
+    var plus = $(this).find('.plus');
+    if (plus.html() == ' + ') {
+      plus.html(' - ');
+    } else {
+      plus.html(' + ');
+    }
+
     $(this).next().slideToggle('show');
   }); //end click
 
