@@ -66,6 +66,29 @@ $(document).ready(function(){
 
   //create string with info to send
 
+  //search button
+    var url = "http://www.omdbapi.com/?s=Wedding";
+
+  $.getJSON(url, function(data) {
+      var list = "<ul>";
+      // Iterate through the data object returned
+      data.Search.forEach( function(item) {
+          // Add the title of result to the list
+          list += "<li>" + item.Title + "</li>";
+      })
+      // Close the unordered list
+      list += "</ul>";
+
+      // Now we just add the newly created list to the results div
+      $("#search_results").html(list);
+  });
+
+
+
+
+
+
+
   $('#calcButton').click(function(){
     $('#calcPie').html("");
 

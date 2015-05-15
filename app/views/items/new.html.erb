@@ -12,37 +12,11 @@
         </div>
  </form>
 
-<%= form_tag("/items/new", method: "get") do %>
+
+<%= form_tag({:controller => "items", :action => "new"}, :method => "get", :id => "nis") do -%>
  <%= label_tag(:q, "Search for:") %>
  <%= text_field_tag(:q) %>
  <%= submit_tag("Search") %>
-<% end %>
-
-<% @database_items.each do |item| %>
-    <form class="searchItem databaseItem" action="/">
-        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
-        <input type="hidden" name="id" class="item[id]" value="<%= item.id %>">
-        <input type="checkbox" name="check" class="checker" value="true">
-        <div class='searchName'>
-            <h3><%= item.name %></h3>
-        </div>
-        <div class="searchResults showMe">
-            <div><strong>Calories</strong><br/>
-                <%= item.calories %>
-            </div>
-            <div><strong>Fat Calories</strong><br/>
-                <%= item.fat  %>
-            </div>
-            <div><strong>Protein Calories</strong><br/>
-                <%= item.protein %>
-            </div>
-            <div><strong>Carbs Calories</strong><br/>
-                <%= item.carbs  %>
-            </div>
-        </div>
-        
-    </form>
-
 <% end %>
 
 <% @items.each do |item| %>
