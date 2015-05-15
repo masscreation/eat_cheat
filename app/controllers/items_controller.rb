@@ -2,7 +2,6 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!  
 
   def show
-
   end
 
   def new
@@ -55,14 +54,9 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
 
-    puts "\n\n\n\n\n\n\n\n\n\n\n BEFORE CHANGE: #{@item.fat}"
-
     @item.fat *= 9
     @item.protein *= 4
     @item.carbs *= 4
-
-
-    puts "\n\n\n AFTER CHANGE: #{@item.fat}"
 
 
     if @item.save 
@@ -95,6 +89,7 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:nutritionix_id, :calories, :fat, :protein, :carbs, :serving_weight_grams, :name)
   end
+
 
 
 end
