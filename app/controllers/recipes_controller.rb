@@ -14,6 +14,7 @@ class RecipesController < ApplicationController
 
   def index
     @user = current_user
+    # @user_recipe = Recipe.find(params[:id])
     @recipes = current_user.recipes
     @recipe = Recipe.new
     @item_options = Item.all.map { |item| [item.name, item.id] }

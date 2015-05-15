@@ -13,44 +13,46 @@ $(document).ready(function(){
 
         // append each recipes
         recipes.forEach(function (recipe) {
-          $recipesCon.append("<div class=\"recipe\" data-id=" + recipe.id + "><h3>" + recipe.name + "</h3>"
-            + 
-          "<button class=\"edit\">Edit</button>" +
-          "<button class=\"delete\">Delete</button></div>"); 
+          $recipesCon.append("<div class=\"recipe\" data-id=" + recipe.id + "><h3><a href=\"recipes/" + recipe.id +"\">" + recipe.name + "</a></h3>"
+            + "<button class=\"delete\">Delete</button></div>"); 
         });
 
       });
       // grab the form
      var $recipeForm = $("#new_recipe"); 
 
+
+     // AJAX CREATE A RECIPE
      $recipeForm.on("submit", function (event) {
       event.preventDefault(); 
-      console.log("Form submitted", $(this).serialize());
-
-      var name = $("#recipe_name").val(); 
-      // var ingredient = $("#recipe_ingredient_item_id").val();
-      // var ingredientAmount = $("#recipe_ingredient_quant_of_item_eaten").val(); 
+      // var $recipeName = $(this).("#recipe_name").val(); 
+      // var ingredient = $(this).("#recipe_ingredient_item_id").val();
+      // var ingredientAmount = $(this).("#recipe_ingredient_quant_of_item_eaten").val(); 
       $.post(path, 
             $recipeForm.serialize(), 
             function(data, textStatus, jqXHR) {
 
+              alert("recipe created!");
 
-              alert(name, "recipe created!");
+            // Set the data received from the request to an
+            // element on the page with id="form_errors"
+            // $( "#form_errors" ).html( data );
 
-        // Set the data received from the request to an
-        // element on the page with id="form_errors"
-              $( "#form_errors" ).html( data );
-            }
-             ).done(function (createdRecipe) {
-        $recipesCon.append("<div class=\"recipe\">" + createdRecipe.name + 
-          "<div><button class=\"edit\">Edit</button></div>" +
-          "<button class=\"delete\">Delete</button></div>");
+
+            }).done(function (data) {
+              console.log(data)
+              // var $recipe = $("<div class=\"recipe\">" + createdRecipe.name + 
+              //                 "<button class=\"edit\">Edit</button>" +
+              //                 "<button class=\"delete\">Delete</button></div>");
+              // $recipesCon.append($recipe);
       }); 
      }); 
   //  setup a click handler that only
     //  handle clicks from an element
     //  with the `.delete` className
     //  that is inside the $recipesCon
+
+    //DELETE A RECIPE
      $recipesCon.on("click", ".delete", function (event) {
       alert("I wask clicked!"); 
 
@@ -72,19 +74,17 @@ $(document).ready(function(){
       })
      }); 
 
-     $recipesCon.on("click", ".edit", function () {
-      preventDefault(); 
+     // EDIT A RECIPE
+     $recipesCon.on("click", ".edit", function (event) {
+      event.preventDefault(); 
       var $recipe = $(this).closest(".recipe"); 
 
-      $.ajax({
-        url: "/users/" + user + "/recipes/" + $recipe.data("id") + ".json", 
-        type: "PATCH",
-        data: {
-          recipe: {
-            completed: this.checked
-          }
-        } 
-      });
+
+        $.ajax({
+          url: "/users/" + user + "/recipes/" + $recipe.data("id") + ".json", 
+          type: "PATCH",
+          data: $recipe.val()
+        });
      }); 
 
      //ADD FORM AJAX and JQUERY FUNCTIONALITY

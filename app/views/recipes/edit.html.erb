@@ -6,14 +6,19 @@
   <div style="margin:20px;">
     <%= form_for [@user, @recipe] do |f| %>
       
-      <%= f.fields_for @ingredient do |b| %> 
-        <%= b.label :item %> <br>
-        <%= b.select(:item_id, @item_options) %><br> <br>
-        <%= b.label "Amount in recipe" %> <br> 
-        <%= b.number_field :quant_of_item_eaten %><br>
-      <% end %><br>
-
-      <%= f.submit "Add item to recipe" %>
+        <div class="ingredient_fields">
+      <a href="#" id="field_adder">Add ingredient</a><br>
+        <div class="ingredient_field">
+          <%= f.fields_for :ingredient do |b| %> 
+            <%= render 'ingredient_form', f: b %> 
+          <% end %>
+          <a href="#" class="field_remover">Remove ingredient</a><br>
+        </div>
+    </div>
+       
+      <div class="actions">
+        <%= f.submit %>
+      </div>
     <% end %>
     <br>
     <div>
@@ -24,3 +29,4 @@
 
 
 
+<%= render 'recipe_magic' %> 
