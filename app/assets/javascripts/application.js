@@ -67,21 +67,21 @@ $(document).ready(function(){
   //create string with info to send
 
   //search button
-    var url = "http://www.omdbapi.com/?s=Wedding";
+  //   var url = "http://www.omdbapi.com/?s=Wedding";
 
-  $.getJSON(url, function(data) {
-      var list = "<ul>";
-      // Iterate through the data object returned
-      data.Search.forEach( function(item) {
-          // Add the title of result to the list
-          list += "<li>" + item.Title + "</li>";
-      })
-      // Close the unordered list
-      list += "</ul>";
+  // $.getJSON(url, function(data) {
+  //     var list = "<ul>";
+  //     // Iterate through the data object returned
+  //     data.Search.forEach( function(item) {
+  //         // Add the title of result to the list
+  //         list += "<li>" + item.Title + "</li>";
+  //     })
+  //     // Close the unordered list
+  //     list += "</ul>";
 
-      // Now we just add the newly created list to the results div
-      $("#search_results").html(list);
-  });
+  //     // Now we just add the newly created list to the results div
+  //     $("#search_results").html(list);
+  // });
 
 
 
@@ -139,6 +139,7 @@ $(document).ready(function(){
     var hash = {};
     var $check = $('form > .checker');
     console.log($check.length);
+    console.log("HI HI HI HI HI");
 
     // run through the checkbox of each searchItem
     $check.each(function(index){
@@ -215,6 +216,7 @@ $(document).ready(function(){
           alert('fail!');
         });
       }
+
     }); //end each
 
 
@@ -222,6 +224,12 @@ $(document).ready(function(){
 
 
   }); //end click
+
+
+
+  
+
+    
 
 }); //end ready
 

@@ -59,36 +59,7 @@
       </div>
     </div>
   </nav>
-                      <!-- second Navbar commented out because Navigation is sufficuient on top -->
-
-                      <!--           <form class="navbar-form navbar-right">
-                                  <input type="text" class="form-control" placeholder="Search...">
-                                </form> -->
-
-
-                          <!-- <div class="container-fluid">
-                            <div class="row">
-                              <div class="col-sm-3 col-md-2 sidebar">
-                                <ul class="nav nav-sidebar">
-                                  <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-                                  <li><a href="#">Reports</a></li>
-                                  <li><a href="#">Analytics</a></li>
-                                  <li><a href="#">Export</a></li>
-                                </ul>
-                                <ul class="nav nav-sidebar">
-                                  <li><%= link_to "Create a New Recipe", new_user_recipe_path(@user) %></li>
-                                  <li><%= link_to "Create a New Item", new_item_path %> </li>
-                                  <li><%= link_to "Show all recipies", user_recipes_path(@user) %></li>
-                                  <li><a href="">One more nav</a></li>
-                                  <li><a href="">Another nav item</a></li>
-                                  <li><a href="">More navigation</a></li>
-                                </ul>
-                                <ul class="nav nav-sidebar">
-                                  <li><a href="">Nav item again</a></li>
-                                  <li><a href="">One more nav</a></li>
-                                  <li><a href="">Another nav item</a></li>
-                                </ul>
-                              </div> -->
+                      
 
 
 <!-- Placeholder for where partial with data analysis will go -->
@@ -198,33 +169,41 @@
             <p>Your logged food will display below.</p> 
  
           <!-- Display morning data  -->          
-                <table class="table table-striped">
+                <table id='datatable' cellspacing="0" class="table table-striped">
                   <thead>
                     <tr>
-                      <th class="persist essential" id="co-0">Morning</th>
-                      <th class="optonal" id="co-1">cal</th>
-                      <th class="optonal" id="co-2">carb</th>
-                      <th  class="optonal" id="co-3">prot</th>
-                      <th  class="optonal" id="co-4">fat</th>
+                      <th id="head" scope="col" class="nobg" style="width:50%">Morning</th>
+                      <th id='h-alt' scope="col" style="width:12%">cal</th>
+                      <th id='h-alt' scope="col" style="width:12%">carb</th>
+                      <th id='h-alt' scope="col" style="width:12%">prot</th>
+                      <th id='h-alt' scope="col" style="width:12%">fat</th>
                     </tr>
                   </thead>
                 <tbody>
-                    <% @food_for_today.each do |food| %>
+                    <% cal = 0 %> <% carb = 0 %> <% prot = 0 %> <% fat = 0 %>
+                    <% @food_morning.each do |food| %>
                     
                       <tr>
-                        <td class="persist essential" id="co-0"><%= food[:name] %></td>
-                        <td class="optonal" id="co-1"><%= food[:calories] %></td>
-                        <td class="optonal" id="co-2"><%= food[:carbs] %></td>
-                        <td class="optonal" id="co-3"><%= food[:protein] %></td>
-                        <td class="optonal" id="co-4"><%= food[:fat] %></td>
+                        <td class='name'><%= food[:name] %></td>
+                        <td><%= food[:calories] %></td>
+                        <% cal += food[:calories] %>
+
+                        <td><%= food[:carbs] %></td>
+                        <% carb += food[:carbs] %>
+
+                        <td><%= food[:protein] %></td>
+                        <% prot += food[:protein] %>
+
+                        <td><%= food[:fat] %></td>
+                        
                       </tr>
                     <% end %>
-                      <tr>              
-                        <td class="persist essential" id="co-0"></td>
-                        <td class="optonal" id="co-1">sum of calories</td>
-                        <td class="optonal" id="co-2">sum of carbs</td>
-                        <td class="optonal" id="co-3">sum of protein</td>
-                        <td class="optonal" id="co-4">sum of fat</td>
+                      <tr>      
+                        <td class='name' style='font-weight:bold;'>My totals</td>
+                        <td><%= cal %></td>
+                        <td><%= carb %></td>
+                        <td><%= prot %></td>
+                        <td>will be added once fat isnt diplaying my date anymore</td>
                       </tr>
                   </tbody>
                 </table>
@@ -233,29 +212,38 @@
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th class="persist essential" id="co-0">Midday</th>
-                      <th class="optonal" id="co-1"></th>
-                      <th class="optonal" id="co-2"></th>
-                      <th class="optonal" id="co-3"></th>
-                      <th class="optonal" id="co-4"></th>
+                      <th scope="col" abbr="Configurations" class="nobg" style="width:50%" >Midday</th>
+                      <th id='h-alt' scope="col" style="width:12%">cal</th>
+                      <th id='h-alt' scope="col" style="width:12%">carb</th>
+                      <th id='h-alt' scope="col" style="width:12%">prot</th>
+                      <th id='h-alt' scope="col" style="width:12%">fat</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <% @food_for_today.each do |food| %>
+                    <% cal = 0 %> <% carb = 0 %> <% prot = 0 %> <% fat = 0 %>
+                    <% @food_midday.each do |food| %>
+                    
                       <tr>
-                        <td class="persist essential" id="co-0"><%= food[:name] %></td>
-                        <td class="optonal" id="co-1"><%= food[:calories] %></td>
-                        <td class="optonal" id="co-2"><%= food[:carbs] %></td>
-                        <td class="optonal" id="co-3"><%= food[:protein] %></td>
-                        <td class="optonal" id="co-4"><%=  food[:fat] %></td>
-                    <% end %>
+                        <td class='name'><%= food[:name] %></td>
+                        <td><%= food[:calories] %></td>
+                        <% cal += food[:calories] %>
+
+                        <td><%= food[:carbs] %></td>
+                        <% carb += food[:carbs] %>
+
+                        <td><%= food[:protein] %></td>
+                        <% prot += food[:protein] %>
+
+                        <td><%= food[:fat] %></td>
+                        
                       </tr>
-                      <tr>              
-                        <td class="persist essential" id="co-0"></td>
-                        <td class="optonal" id="co-1">sum of calories</td>
-                        <td class="optonal" id="co-2">sum of carbs</td>
-                        <td class="optonal" id="co-3">sum of protein</td>
-                        <td class="optonal" id="co-4">sum of fat</td>
+                    <% end %>
+                      <tr>      
+                        <td class='name' style='font-weight:bold;'>My totals</td>
+                        <td><%= cal %></td>
+                        <td><%= carb %></td>
+                        <td><%= prot %></td>
+                        <td>will be added once fat isnt diplaying my date anymore</td>
                       </tr>
                   </tbody>
                 </table>
@@ -264,40 +252,41 @@
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th class="persist essential" id="co-0">Evening</th>
-                      <th class="optonal" id="co-1"></th>
-                      <th class="optonal" id="co-2"></th>
-                      <th class="optonal" id="co-3"></th>
-                      <th class="optonal" id="co-4"></th>
+                      <th scope="col" abbr="Configurations" class="nobg" style="width:50%" >Evening</th>
+                      <th id='h-alt' scope="col" style="width:12%">cal</th>
+                      <th id='h-alt' scope="col" style="width:12%">carb</th>
+                      <th id='h-alt' scope="col" style="width:12%">prot</th>
+                      <th id='h-alt' scope="col" style="width:12%">fat</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <% @food_for_today.each do |food| %>
+                    <% cal = 0 %> <% carb = 0 %> <% prot = 0 %> <% fat = 0 %>
+                    <% @food_evening.each do |food| %>
+                    
                       <tr>
-                        <td class="persist essential" id="co-0"><%= food[:name] %></td>
-                        <td class="optonal" id="co-1"><%= food[:calories] %></td>
-                        <td class="optonal" id="co-2"><%= food[:carbs] %></td>
-                        <td class="optonal" id="co-3"><%= food[:protein] %></td>
-                        <td class="optonal" id="co-4"><%= food[:fat] %></td>
+                        <td class='name'><%= food[:name] %></td>
+                        <td><%= food[:calories] %></td>
+                        <% cal += food[:calories] %>
+
+                        <td><%= food[:carbs] %></td>
+                        <% carb += food[:carbs] %>
+
+                        <td><%= food[:protein] %></td>
+                        <% prot += food[:protein] %>
+
+                        <td><%= food[:fat] %></td>
+                        
+                      </tr>
                     <% end %>
+                      <tr>      
+                        <td class='name' style='font-weight:bold;'>My totals</td>
+                        <td><%= cal %></td>
+                        <td><%= carb %></td>
+                        <td><%= prot %></td>
+                        <td>will be added once fat isnt diplaying my date anymore</td>
                       </tr>
-                      <tr>              
-                        <td class="persist essential" id="co-0"></td>
-                        <td class="optonal" id="co-1">sum of calories</td>
-                        <td class="optonal" id="co-2">sum of carbs</td>
-                        <td class="optonal" id="co-3">sum of protein</td>
-                        <td class="optonal" id="co-4">sum of fat</td>
-                      </tr>
-                  </tbody>
                 </table>
 
               	 
-          
-
-
-
-
-
 
     <%= render "profile_piecharts" %>
 

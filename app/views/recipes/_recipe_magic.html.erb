@@ -1,0 +1,98 @@
+<script>
+$(document).ready(function(){ 
+
+  // grab the 'recipes-con'
+  var $recipesCon = $("#recipes-con"); 
+
+     var user = location.pathname.split('/')[2]; 
+      var path = location.pathname + '.json';
+
+    $.get(path)
+      .done(function (recipes) {
+        console.log("All Recipes:", recipes);
+
+        // append each recipes
+        recipes.forEach(function (recipe) {
+          $recipesCon.append("<div>" + recipe.name + "</div>"); 
+        });
+
+      });
+      // grab the form
+     var $recipeForm = $("#new_recipe"); 
+
+     $recipeForm.on("submit", function (event) {
+      event.preventDefault(); 
+      console.log("Form submitted", $(this).serialize());
+
+      var content = $("#recipe_content").val(); 
+      $.post("/users/:id/recipes", {
+        recipe: {
+          content: content 
+        }
+      }).done(function (createdRecipe) {
+        $recipesCon.append("<div class=\"recipe\" data-id=" + createdRecipe.id + ">" + createdRecipe.content + 
+          "<input type=\"checkbox\" class=\"completed\">" + 
+          "<button class=\"delete\">Delete</button></div>");
+      }); 
+     }); 
+  //  setup a click handler that only
+    //  handle clicks from an element
+    //  with the `.delete` className
+    //  that is inside the $recipesCon
+     $recipesCon.on("click", ".delete", function (event) {
+      alert("I wask clicked!"); 
+      
+      // grab the entire recipe
+      var $recipe = $(this).closest(".recipe"); 
+
+      //send our delete request
+      $.ajax({
+        url: "/users/:id/recipes/" + $recipe.data("id") + ".json",
+        type: "DELETE"
+      }).done(function(){
+        //once we completed the delete
+        $recipe.remove(); 
+      })
+     }); 
+
+     $recipesCon.on("click", ".completed", function () {
+      var $recipe = $(this).closest(".recipe"); 
+
+      $.ajax({
+        url: "/users/:id/recipes" + $recipe.data("id") + ".json", 
+        type: "PATCH",
+        data: {
+          recipe: {
+            completed: this.checked
+          }
+        } 
+      }).done(function (data) {
+        // update the styling of our recipe
+        $recipe.toggleClass("recipe-completed")
+      }) 
+     }); 
+
+     // hide hidden fields
+     $('#hidden_field').hide(); 
+
+     // grab ingredient field
+     var $ingredientField = $('.ingredient_field')
+
+     // add ingredent field to Recipe form
+     $("#field_adder").click(function( event ) {
+        event.preventDefault();
+        $(".ingredient_fields").append("<div class=\"ingredient_field\">" + $ingredientField.html() + "</div>")
+        clicker();
+      });
+
+     var clicker = function() {
+      $(".field_remover").click(function( event ) {
+        event.preventDefault();
+        console.log('click'); 
+        this.closest(".ingredient_field").remove()
+        // $($ingredientField).remove(); 
+      });
+    };
+
+}); //end ready
+</script>

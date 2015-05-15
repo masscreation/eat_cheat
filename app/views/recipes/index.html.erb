@@ -1,28 +1,55 @@
 <div class="container">
 	<div class="row">
-		<div class="col-md-3"></div>
-		<div class="col-md-6">
-			
-			<table>
-				<thead>
-					<tr>
-						<th><h1>Your Recipes</h1></th>
-					</tr>
-				</thead>
-				<% @recipes.each do |recipe|  %>
-					<tr>
-						<td><h2><%= link_to "#{recipe.name}", user_recipe_path(@user, recipe) %></h2></td>
-						<td><%= button_to "Edit", edit_user_recipe_path(@user, recipe.id), method: 'get' %></td>
-						<td><%= button_to "Destroy", user_recipe_path(@user, recipe.id), method: 'delete', data: { confirm: 'Are you sure?' } %></td>
-					</tr>
-				<% end  %>
-			</table>
+		<div class="col-md-3"></div><!-- 3-spaced div -->
+		<div class="col-md-6"><!-- Middle div -->
+		
+		<!-- Display recipe data -->
+		<div id="recipes-con">
+    		
+		</div>
+
+		<h3> Create a New Recipe </h3>
+		<%= form_for [@user, @recipe] do |f| %>
+		    <% if @recipe.errors.any? %>
+		      <div id="error_explanation">
+		        <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+		        <ul>
+		        <% @recipe.errors.full_messages.each do |message| %>
+		          <li><%= message %></li>
+		        <% end %>
+		        </ul>
+		      </div>
+		    <% end %>
+
+	    <div class="field">
+		      <%= f.label :name %><br>
+		      <%= f.text_field :name %>
+	    </div>
+	    <div class="ingredient_fields">
+			<a href="#" id="field_adder">Add ingredient</a><br>
+		    <div class="ingredient_field">
+		    	<%= f.fields_for :ingredient do |b| %> 
+		    		<%= render 'ingredient_form', f: b %> 
+		    	<% end %>
+		    	<a href="#" class="field_remover">Remove ingredient</a><br>
+		    </div>
+		</div>
+	     
+
+
+
+	    <div class="actions">
+	      <%= f.submit %>
+	    </div>
+	  <% end %>
 			    
-			<br><br>
+		<br><br>
 			
 			<%= link_to "Back to Dashboard", '/' %> 
-		</div>
-		<div class="col-md-3"></div>
+
+		</div> <!-- End of middle div -->
+
+		<div class="col-md-3"></div> <!-- 3-spaced div -->
 	</div>
 </div>
-
+<%= render 'recipe_magic' %> 
