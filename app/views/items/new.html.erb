@@ -2,13 +2,21 @@
 
 <h1>Search for a food item</h1>
     <div id = 'sidebar'>
-        <div id = 'calcPie'></div>
         <div id='calcButton'>
             Calculate
         </div>
+        <div id = "dataItem">
+            <div id="pie" class='sideText'></div>
+            <div id = 'calcPie'></div>
+            <div id="calcNeed" class='sideText'></div>
+            <div id = 'calcBar'></div>
+        </div>
         <form id='checkout' class='showMe'>
+            <div style='border-top: 1px solid;'>
+            <span class='sideText' style="margin: 10px 0;">Add selected items<br/> to database:</span>
             <div id='createItem'>
-                Create
+                Add
+            </div>
             </div>
           <!--   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
             <p>Enter the time you ate these items:</p>
@@ -76,7 +84,8 @@
     <% end %>
 </div>
 
+<%= render "items_progressbar" %>
 <%= render "items_piecharts" %>
 <%= render "items_ajax" %>
    
-<%= link_to "Back to Dashboard", "/" %> 
+

@@ -35,12 +35,14 @@ $(document).ready(function(){
 
   $('#calcButton').click(function(){
     $('#calcPie').html("");
+    $('#calcBar').html("");
     $('#checkout').slideDown('show');
     $('#createItem').slideDown('show');
 
     var prot = 0,
         carbs = 0,
-        fat = 0;
+        fat = 0,
+        cal = 0;
 
     var $check = $('form > .checker');
 
@@ -68,6 +70,7 @@ $(document).ready(function(){
        prot += parseInt(del.protein);
        carbs += parseInt(del.carbs);
        fat += parseInt(del.fat);
+       cal += parseInt(del.calories);
 
       }
 
@@ -77,6 +80,7 @@ $(document).ready(function(){
     console.log(carbs);
     console.log(fat);
     pieChart('#calcPie', prot, carbs, fat);
+    calGraph('#calcBar', cal, 2200);
   });//end click
   
   
