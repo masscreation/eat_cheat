@@ -51,6 +51,7 @@ class RecipesController < ApplicationController
   end
 
   def update
+      @user = current_user
       @recipe = Recipe.find(params[:id])
       puts "\n\n\n\n\n\n\n\n\n\n\n\n\n  #{@recipe.name}"
      
@@ -67,10 +68,8 @@ class RecipesController < ApplicationController
       @ingredients.each do |x|
         x.update_attribute('quant_of_item_eaten', @quant)
       end
-
-      respond_to do |format|
-        format.html
-        format.json { render json: @recipe }
+      if @recipe.save 
+        redirect_to user_recipe_path(@user, @recipe)
       end
       #need to associate item with recipe
   end
