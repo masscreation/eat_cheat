@@ -6,14 +6,14 @@
 			<table>
 				<thead>
 					<tr>
-						<th>
+						<th class="rec">
 							<h2><%= @recipe.name %></h2>
 						</th>
 						<th>&nbsp;</th>
-						<th>
+						<th class="rec">
 							<%= button_to "Edit", edit_user_recipe_path(@user, @recipe), method: 'get' %>
 						</th>
-						<th>
+						<th class="rec">
 							<%= button_to "Destroy", user_recipe_path(@user, @recipe), method: 'delete', data: { confirm: 'Are you sure?' } %>
 						</th>
 					</tr>

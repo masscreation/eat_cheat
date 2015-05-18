@@ -51,6 +51,7 @@ class RecipesController < ApplicationController
   end
 
   def update
+      @user = current_user
       @recipe = Recipe.find(params[:id])
       @user = current_user
       puts "\n\n\n\n\n\n\n\n\n\n\n\n\n  #{@recipe.name}"
@@ -68,7 +69,7 @@ class RecipesController < ApplicationController
       @ingredients.each do |x|
         x.update_attribute('quant_of_item_eaten', @quant)
       end
-      if @recipe.save
+      if @recipe.save 
         redirect_to user_recipe_path(@user, @recipe)
       end
 
