@@ -27,10 +27,11 @@
         </form>
     </div>
 
-<form id = 'nis'> 
-    <input id='q' type="text" placeholder="Search for Items">
-    <button id='searchAPI'>Search</button>
-</form>
+<%= form_for @item, html: { id: "nis" } do |f| %>
+  <%= f.text_field :name %>
+  <%= f.submit :id => 'searchAPI', :value => 'Search' %>
+<% end %>
+
 
 
 <div id = 'searchFolder'>
