@@ -9,7 +9,7 @@
 						<th class="rec">
 							<h2><%= @recipe.name %></h2>
 						</th>
-						<th>&nbsp;</th>
+						<th class="rec">&nbsp;</th>
 						<th class="rec">
 							<%= button_to "Edit", edit_user_recipe_path(@user, @recipe), method: 'get' %>
 						</th>
@@ -20,20 +20,20 @@
 				</thead>
 			</table>	
 			<% @recipe.ingredients.each do |ingredient| %> 
-				<table>
+				<table class="rec">
 					<thead>
 						<tr>
 							
-							<th>Ingredients</th>
-							<th>&nbsp;</th>
-							<th>Calories</th>
+							<th class="rec">Ingredients</th>
+							<th class="rec">&nbsp;</th>
+							<th class="rec">Calories</th>
 							
 						</tr>
 					</thead>
 					<tr>
-						<td><%= ingredient.item.name %></td>
-						<td>&nbsp;</td>
-						<td><%= ingredient.item.calories %></td>
+						<td class="rec"><%= ingredient.item.name %></td>
+						<td class="rec">&nbsp;</td>
+						<td class="rec"><%= ingredient.item.calories %></td>
 
 					</tr>
 					

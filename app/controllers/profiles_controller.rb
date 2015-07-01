@@ -36,8 +36,6 @@ class ProfilesController < ApplicationController
       @fat_per_recipe = 0
 
       recipe.meals.each do |meal|
-        
-        meal.recipe.items.each do |item|
 
           #Filter info only for today
           if (meal.time_eaten.day == @today.day)
@@ -59,29 +57,29 @@ class ProfilesController < ApplicationController
               #create array with all recipes eaten for midday
               @food_midday << { 'name': meal.recipe.name, 'calories': meal.recipe.cal_sum, 'carbs': meal.recipe.carb_sum, 
               'protein': meal.recipe.prot_sum, 'fat': meal.recipe.fat_sum}
+
             end
+
 
             # EVENING:
             if (meal.time_eaten.hour.between?(17.51,23.99))
-              @cal_per_recipe += item.calories.round(1)
-              @carb_per_recipe += item.carbs.round(1)
-              @prot_per_recipe += item.protein.round(1)
-              @fat_per_recipe += item.fat.round(1)
 
               #create array with all recipes eaten for evening
-              @food_evening << { 'name': meal.recipe.name, 'calories': @cal_per_recipe, 'carbs': @carb_per_recipe, 
-              'protein': @prot_per_recipe, 'fat': @fat_per_recipe}
+              @food_evening << { 'name': meal.recipe.name, 'calories': meal.recipe.cal_sum, 'carbs': meal.recipe.carb_sum, 
+              'protein': meal.recipe.prot_sum, 'fat': meal.recipe.fat_sum}
             end
-            @calories += item.calories
+         
           end #if filter today
             
           #connect recipe-data for charts
+          # meal.recipe.items.each do |item|
           meal.recipe.items.each do |item|
             @fat += item.fat
             @protein += item.protein
             @carbs += item.carbs
+            
           end
-        end #\item\
+        #end #\item\
       end #\meal|
     end #|recipe|
 
